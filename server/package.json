@@ -4,12 +4,13 @@
   "license": "MIT",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && nodemon dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.9.14",
+    "nodemon": "^2.0.4",
     "tslint": "^6.1.2",
     "typescript": "^3.9.2"
   }
