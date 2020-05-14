@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ExampleCommonButton from '@website/common/components/ExampleCommonButton';
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
         >
           Learn React
         </a>
-        <ExampleCommonButton/>
       </header>
     </div>
   );

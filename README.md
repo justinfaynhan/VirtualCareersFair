@@ -6,20 +6,8 @@ Install all website dependencies
 yarn run website-install
 ```
 
-Run admin interface
+Run website interface
 
 ```bash
-yarn run admin-start
-```
-
-Run company interface
-
-```bash
-yarn run company-start
-```
-
-Run student interface
-
-```bash
-yarn run student-start
+yarn run website-start
 ```

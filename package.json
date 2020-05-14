@@ -7,8 +7,6 @@
   "license": "MIT",
   "scripts": {
     "website-install": "cd website && yarn",
-    "admin-start": "cd website && yarn --cwd admin start",
-    "student-start": "cd website && yarn --cwd student start",
-    "company-start": "cd website && yarn --cwd company start"
+    "website-start": "cd website && yarn start"
   }
 }
