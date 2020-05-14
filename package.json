@@ -1,3 +1,14 @@
 {
-  "devDependencies": {}
+  "name": "virtualCareersFair",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:justinfaynhan/VirtualCareersFair.git",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "website-install": "cd website && yarn",
+    "admin-start": "cd website && yarn --cwd admin start",
+    "student-start": "cd website && yarn --cwd student start",
+    "company-start": "cd website && yarn --cwd company start"
+  }
 }
