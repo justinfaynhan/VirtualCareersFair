@@ -1,13 +1,25 @@
 # Virtual Careers Fair
 
-Install all website dependencies
+Install website dependencies
 
 ```bash
-yarn run website-install
+yarn website-install
+```
+
+Install server dependencies
+
+```bash
+yarn server-install
 ```
 
 Run website interface
 
 ```bash
-yarn run website-start
+yarn website
+```
+
+Run server
+
+```bash
+yarn server
 ```
