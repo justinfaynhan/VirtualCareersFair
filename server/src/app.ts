@@ -1,13 +1,10 @@
 import express from 'express';
+import bodyparser from 'body-parser';
 
+import config from 'server_config'
 const app = express();
-const port = 3000;
-app.get('/', (req, res) => {
-  res.send('hihihihihihihihihoiohiahdiosadhsaoioooooo');
-});
-app.listen(port, err => {
-  if (err) {
-    return console.error(err);
-  }
+const port = config.PORT;
+
+app.listen(port, () => {
   return console.log(`server is listening on ${port}`);
 });
