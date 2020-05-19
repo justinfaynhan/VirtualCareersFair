@@ -29,9 +29,9 @@ router.get('/student/:id', makeCallback(getStudentProfile));
 router.put('/student/:id', makeCallback(updateStudentProfile));
 
 router.get('/company', makeCallback(getCompanyDashboard));
-router.put('/company/careersfair/company/:id', makeCallback(updateCompanyInfo));
-router.get('/company/careersfair/company/:id/analytics', makeCallback(getCompanyAnalytics));
-router.get('/company/careersfair/company/:id/analytics/download', makeCallback(getCompanyAnalyticsDownload));
+router.put('/company/:id', makeCallback(updateCompanyInfo));
+router.get('/company/:id/analytics', makeCallback(getCompanyAnalytics));
+router.get('/company/:id/analytics/download', makeCallback(getCompanyAnalyticsDownload));
 
 router.get('/admin', makeCallback(getAdminDashboard));
 router.get('/admin/students', makeCallback(getStudentsList));
