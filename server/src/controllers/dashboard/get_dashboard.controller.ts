@@ -1,18 +1,18 @@
 import {IHttpRequest} from 'interfaces/IHttp';
-import {IGetCompanyAnalytics, IAnalytics} from 'interfaces/ICompany';
+import {IGetDashboard, IDashboard} from 'interfaces/IDashboard';
 
-const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
+const makeGetDashboardInfo = (getDashboard: IGetDashboard) => {
   return async (httpRequest: IHttpRequest) => {
     const headers = {
       'Content-Type': 'application/json'
     }
     try {
-      const id = httpRequest.params.id
-      const analytics: [IAnalytics] = await getCompanyAnalytics(id);
+      const type: string = httpRequest.params.dashboard;
+      const dashboard: IDashboard= await getDashboard(type);
       return {
         headers,
         statusCode: 200,
-        body: analytics
+        body: dashboard
       }
     } catch (e) {
       // TODO: Error logging
@@ -28,4 +28,4 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
   }
 }
 
-export default makeGetCompanyAnalytics;
+export default makeGetDashboardInfo;

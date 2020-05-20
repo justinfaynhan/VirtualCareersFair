@@ -1,18 +1,19 @@
 import {IHttpRequest} from 'interfaces/IHttp';
-import {IGetCompanyAnalytics, IAnalytics} from 'interfaces/ICompany';
+import {IInviteUser} from 'interfaces/IAdmin';
 
-const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
+const makeInviteUser = (inviteUser: IInviteUser) => {
   return async (httpRequest: IHttpRequest) => {
     const headers = {
       'Content-Type': 'application/json'
     }
     try {
-      const id = httpRequest.params.id
-      const analytics: [IAnalytics] = await getCompanyAnalytics(id);
+      const email: string = httpRequest.params.email;
+      const type: string = httpRequest.params.type;
+      const invite_code = await inviteUser(type, email);
       return {
         headers,
         statusCode: 200,
-        body: analytics
+        body: invite_code
       }
     } catch (e) {
       // TODO: Error logging
@@ -28,4 +29,4 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
   }
 }
 
-export default makeGetCompanyAnalytics;
+export default makeInviteUser;

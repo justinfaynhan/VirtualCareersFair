@@ -1,18 +1,18 @@
 import {IHttpRequest} from 'interfaces/IHttp';
-import {IGetCompanyAnalytics, IAnalytics} from 'interfaces/ICompany';
+import {IGetUsersList} from 'interfaces/IAdmin';
 
-const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
+const makeGetUsersList = (getUsersList: IGetUsersList) => {
   return async (httpRequest: IHttpRequest) => {
     const headers = {
       'Content-Type': 'application/json'
     }
     try {
-      const id = httpRequest.params.id
-      const analytics: [IAnalytics] = await getCompanyAnalytics(id);
+      const type = httpRequest.params.type;
+      const companiesList = await getUsersList(type);
       return {
         headers,
         statusCode: 200,
-        body: analytics
+        body: companiesList
       }
     } catch (e) {
       // TODO: Error logging
@@ -28,4 +28,4 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
   }
 }
 
-export default makeGetCompanyAnalytics;
+export default makeGetUsersList;

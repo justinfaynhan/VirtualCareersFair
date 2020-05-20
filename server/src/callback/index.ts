@@ -1,6 +1,7 @@
+import * as express from 'express';
 
-const makeExpressCallback = (controller) => {
-  return (req, res) => {
+const makeCallback = (controller) => {
+  return (req: express.Request, res: express.Response) => {
     const httpRequest = {
       body: req.body,
       query: req.query,
@@ -26,4 +27,4 @@ const makeExpressCallback = (controller) => {
   }
 }
 
-export default makeExpressCallback;
+export default makeCallback;
