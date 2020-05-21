@@ -1,10 +1,10 @@
 import makeGetCareersFairLanding from 'controllers/careersfair/get_careers_fair_landing.controller';
 import makeGetCompanyInfo from 'controllers/careersfair/get_company_info.controller';
 
-import {getCareersFair, getComapny} from 'usecases';
+import {getCareersFair, getCompany} from 'usecases';
 
 const getCareersFairLanding = makeGetCareersFairLanding(getCareersFair);
-const getCompanyInfo = makeGetCompanyInfo(getComapny);
+const getCompanyInfo = makeGetCompanyInfo(getCompany);
 
 const careersFairController = Object.freeze({
   getCareersFairLanding,
