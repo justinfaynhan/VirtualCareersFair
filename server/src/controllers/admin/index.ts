@@ -2,7 +2,7 @@ import makeGetUsersList from 'controllers/admin/get_users_list.controller';
 import makeInviteUser from 'controllers/admin/invite_user.controller';
 import makeUpdateDashboardInfo from 'controllers/admin/update_dashboard.controller';
 
-import {getUsers, createInvite, updateWebsiteInfo} from 'use_cases';
+import {getUsers, createInvite, updateWebsiteInfo} from 'usecases';
 
 const getUsersList = makeGetUsersList(getUsers);
 const inviteUser = makeInviteUser(createInvite);

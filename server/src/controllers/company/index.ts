@@ -2,7 +2,7 @@ import makeGetCompanyAnalyticsDownload from 'controllers/company/get_company_ana
 import makeGetCompanyAnalytics from 'controllers/company/get_company_analytics.controller';
 import makeUpdateCompanyInfo from 'controllers/company/update_company_info.controller';
 
-import {getCompanyAnalyticsData, getCompanyAnalyticsFile, updateCompany} from 'use_cases';
+import {getCompanyAnalyticsData, getCompanyAnalyticsFile, updateCompany} from 'usecases';
 
 const getCompanyAnalytics = makeGetCompanyAnalytics(getCompanyAnalyticsData);
 const getCompanyAnalyticsDownload = makeGetCompanyAnalyticsDownload(getCompanyAnalyticsFile);

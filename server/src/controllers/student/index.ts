@@ -1,7 +1,7 @@
 import makeGetStudentProfile from 'controllers/student/get_student_profile.controller';
 import makeUpdateStudentProfile from 'controllers/student/update_student_profile.controller';
 
-import {getStudent, updateStudent} from 'use_cases';
+import {getStudent, updateStudent} from 'usecases';
 
 const getStudentProfile = makeGetStudentProfile(getStudent);
 

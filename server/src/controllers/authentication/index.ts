@@ -1,7 +1,7 @@
 import makeRegister from 'controllers/authentication/register.controller';
 import makeLogin from 'controllers/authentication/login.controller';
 
-import {addUser, getUser} from 'use_cases';
+import {addUser, getUser} from 'usecases';
 
 const register = makeRegister(addUser);
 const login = makeLogin(getUser);

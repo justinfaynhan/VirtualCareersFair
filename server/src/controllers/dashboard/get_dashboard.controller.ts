@@ -7,7 +7,7 @@ const makeGetDashboardInfo = (getDashboard: IGetDashboard) => {
       'Content-Type': 'application/json'
     }
     try {
-      const type: string = httpRequest.params.dashboard;
+      const type: string = httpRequest.params.type;
       const dashboard: IDashboard= await getDashboard(type);
       return {
         headers,

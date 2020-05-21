@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "dist/app.js",
   "scripts": {
+    "generate": "tsoa routes && tsoa swagger",
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "start:dev": "NODE_PATH=dist tsc-watch -p tsconfig.build.json --onSuccess \"node dist/app.js\"",
     "start:prod": "NODE_PATH=dist node dist/app.js",

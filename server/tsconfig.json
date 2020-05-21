@@ -7,6 +7,7 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "src",
+    "experimentalDecorators": true
   },
   "lib": ["es2015"],
   "include": ["src"]

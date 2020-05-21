@@ -1,6 +1,6 @@
 import makeGetDashboardInfo from 'controllers/dashboard/get_dashboard.controller';
 
-import {getWebsiteInfo} from 'use_cases';
+import {getWebsiteInfo} from 'usecases';
 
 const getDashboardInfo = makeGetDashboardInfo(getWebsiteInfo);
 
