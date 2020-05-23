@@ -37,7 +37,7 @@ export class Register extends Controller {
     @Query() invite_code: string,
     @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(register));
+    return makeCallback(register)(request);
   }
 }
 
@@ -52,7 +52,7 @@ export class Login extends Controller {
     @Query() password: string,
     @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(login));
+    return makeCallback(login)(request);
   }
 }
 
@@ -67,7 +67,7 @@ export class CareersFair extends Controller {
     @Query() token: string,
     @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(getCareersFairLanding));
+    return makeCallback(getCareersFairLanding)(request);
   }
   /**Get a specific company landing page signed up to the careers fair.
    * 
@@ -79,7 +79,7 @@ export class CareersFair extends Controller {
     @Path('id') id: string,
     @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(getCompanyInfo));
+    return makeCallback(getCompanyInfo)(request);
   }
 }
 
@@ -98,9 +98,9 @@ export class DashboardInfo extends Controller {
   public async get(
     @Query() token: string,
     @Path('type') type: string,
-    @Request() request: Express.Request
+    @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(getDashboardInfo));
+    return makeCallback(getDashboardInfo)(request);
   }
 }
 
@@ -116,7 +116,7 @@ export class Student extends Controller {
     @Path('id') id: string,
     @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(getStudentProfile));
+    return makeCallback(getStudentProfile)(request);
   }
   /**Update a student's profile information.
    * 
@@ -140,7 +140,7 @@ export class Student extends Controller {
     },
     @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(updateStudentProfile));
+    return makeCallback(updateStudentProfile)(request);
   }
 }
 
@@ -163,9 +163,9 @@ export class Company extends Controller {
       website: string;
       contact_info: any;
     },
-    @Request() request: Express.Request
+    @Request() request: express.Request
   ): Promise<any> {
-    return makeCallback(updateCompanyInfo);
+    return makeCallback(updateCompanyInfo)(request);
   }
   /**Get a list of users that have browsed the company landing page.
    * 
@@ -175,9 +175,9 @@ export class Company extends Controller {
   public async getAnalytics(
     @Query() token: string,
     @Path('id') id: string,
-    @Request() request: Express.Request
+    @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(getCompanyAnalytics));
+    return makeCallback(getCompanyAnalytics)(request);
   }
   /**Download a .csv list of users that have browsed the company landing page.
    * 
@@ -187,9 +187,9 @@ export class Company extends Controller {
   public async getAnalyticsDownload(
     @Query() token: string,
     @Path('id') id: string,
-    @Request() request: Express.Request
+    @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(getCompanyAnalyticsDownload));
+    return makeCallback(getCompanyAnalyticsDownload)(request);
   }
 }
 
@@ -205,9 +205,10 @@ export class Admin extends Controller {
   @Get('users/{type}')
   public async getUsers(
     @Query() token: string,
-    @Request() request: Express.Request
+    @Path('type') type: string,
+    @Request() request: express.Request
   ): Promise<any> {
-    return makeCallback(getUsersList);
+    return makeCallback(getUsersList)(request);
   }
   /**Generates a valid time-limited invite code which can be used to register 
    * an account on the platform with appropriate privileges. 
@@ -221,9 +222,9 @@ export class Admin extends Controller {
   public async postInvite(
     @Query() token: string,
     @Path('type') type: string,
-    @Request() request: Express.Request
+    @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(inviteUser));
+    return makeCallback(inviteUser)(request);
   }
   /**Update the dashboard info interface for a particular account type. 
    * 
@@ -240,8 +241,8 @@ export class Admin extends Controller {
       instructions: any;
       about_us: any;
     },
-    @Request() request: Express.Request
+    @Request() request: express.Request
   ): Promise<any> {
-    return Promise.resolve(makeCallback(updateDashboardInfo));
+    return makeCallback(updateDashboardInfo)(request);
   }
 }
