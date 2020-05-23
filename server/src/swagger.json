@@ -32,6 +32,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Registers a new user. Depending on invite_code, user will have either \nstudent, company or admin privileges. The invite_code is expected to be \ngenerated and provided by a platform admin.",
 				"security": [],
 				"parameters": [
 					{
@@ -57,14 +58,6 @@
 						"schema": {
 							"type": "string"
 						}
-					},
-					{
-						"in": "query",
-						"name": "token",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
 					}
 				]
 			}
@@ -84,6 +77,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Logs in a user into the platform. Depending on the account privilege type, \nwill log the user into the appropriate interface.",
 				"security": [],
 				"parameters": [
 					{
@@ -97,14 +91,6 @@
 					{
 						"in": "query",
 						"name": "password",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "query",
-						"name": "token",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -128,6 +114,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Get the careers fair home page\n\nRequest token must be authorized as any account of any type.",
 				"security": [],
 				"parameters": [
 					{
@@ -156,6 +143,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Get a specific company landing page signed up to the careers fair.\n\nRequest token must be authorized as any account of any type.",
 				"security": [],
 				"parameters": [
 					{
@@ -169,6 +157,43 @@
 					{
 						"in": "path",
 						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/info/{type}": {
+			"get": {
+				"operationId": "Get",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"additionalProperties": true
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"description": "Get the dashboard info interface associated with the requested type.\n\nThe requested {type} parameter must be of either 'admin' | \"student' | \n'company', which will be cross checked with the associated token user \naccount privileges for authorization.\n\nOnly tokens authorized as admins can get the dashboard info of other \naccount types.",
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "type",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -192,6 +217,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Get a student's profile information.\n\nRequest token must be authorized as any account of any type.",
 				"security": [],
 				"parameters": [
 					{
@@ -212,8 +238,8 @@
 					}
 				]
 			},
-			"post": {
-				"operationId": "Post",
+			"put": {
+				"operationId": "Put",
 				"responses": {
 					"200": {
 						"content": {
@@ -226,6 +252,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Update a student's profile information.\n\nRequest token must be authorized as the student of same id.",
 				"security": [],
 				"parameters": [
 					{
@@ -297,42 +324,6 @@
 				}
 			}
 		},
-		"/info/{type}": {
-			"get": {
-				"operationId": "Get",
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"additionalProperties": true
-								}
-							}
-						},
-						"description": "Ok"
-					}
-				},
-				"security": [],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "token",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					},
-					{
-						"in": "path",
-						"name": "type",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
 		"/company/{id}": {
 			"put": {
 				"operationId": "Put",
@@ -348,6 +339,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Update a specific company landing page information.\n\nRequest token must be authorized as the company of same id.",
 				"security": [],
 				"parameters": [
 					{
@@ -366,7 +358,49 @@
 							"type": "string"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"contact_info": {
+										"additionalProperties": true
+									},
+									"website": {
+										"type": "string"
+									},
+									"videos": {
+										"additionalProperties": true
+									},
+									"graduate_stories": {
+										"additionalProperties": true
+									},
+									"overview": {
+										"additionalProperties": true
+									},
+									"name": {
+										"type": "string"
+									},
+									"id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"contact_info",
+									"website",
+									"videos",
+									"graduate_stories",
+									"overview",
+									"name",
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/company/{id}/analytics": {
@@ -384,6 +418,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Get a list of users that have browsed the company landing page.\n\nRequest token must be authorized as the company of same id.",
 				"security": [],
 				"parameters": [
 					{
@@ -420,6 +455,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Download a .csv list of users that have browsed the company landing page.\n\nRequest token must be authorized as the company of same id.",
 				"security": [],
 				"parameters": [
 					{
@@ -442,7 +478,7 @@
 			}
 		},
 		"/admin/users/{type}": {
-			"put": {
+			"get": {
 				"operationId": "GetUsers",
 				"responses": {
 					"200": {
@@ -456,6 +492,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Get all users of specified type registered on the platform.\n\nThe requested {type} parameter must be of either 'admin' | \"student' | \n'company'.\n\nRequest token must be authorized as admin.",
 				"security": [],
 				"parameters": [
 					{
@@ -484,6 +521,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Generates a valid time-limited invite code which can be used to register \nan account on the platform with appropriate privileges. \n\nThe requested {type} parameter must be of either 'admin' | \"student' | \n'company'.\n\nRequest token must be authorized as admin.",
 				"security": [],
 				"parameters": [
 					{
@@ -520,6 +558,7 @@
 						"description": "Ok"
 					}
 				},
+				"description": "Update the dashboard info interface for a particular account type. \n\nThe requested {type} parameter must be of either 'admin' | \"student' | \n'company'.\n\nRequest token must be authorized as admin.",
 				"security": [],
 				"parameters": [
 					{
@@ -538,7 +577,29 @@
 							"type": "string"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"about_us": {
+										"additionalProperties": true
+									},
+									"instructions": {
+										"additionalProperties": true
+									}
+								},
+								"required": [
+									"about_us",
+									"instructions"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

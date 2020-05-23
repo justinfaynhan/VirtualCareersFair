@@ -20,7 +20,7 @@ const port = config.PORT;
 
 try {
 	const swaggerDocument = require('./swagger.json');
-	app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+	app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 } catch (err) {
 	console.error('Unable to read swagger.json', err);
 }
