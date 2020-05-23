@@ -1,3 +1,6 @@
+# Custom
+src/routes.ts
+
 lib-cov
 *.seed
 *.log
