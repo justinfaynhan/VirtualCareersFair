@@ -1,5 +1,5 @@
 # Custom
-./src/routes.ts
+src/routes.ts
 
 lib-cov
 *.seed
