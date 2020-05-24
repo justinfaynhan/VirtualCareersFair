@@ -7,7 +7,7 @@ const makeGetCareersFairLanding = (getCareersFairLanding: IGetCareersFairLanding
       'Content-Type': 'application/json'
     }
     try {
-      const careersFair: [ICareersFairLandingCompany] = await getCareersFairLanding();
+      const careersFair = await getCareersFairLanding();
       return {
         headers,
         statusCode: 200,

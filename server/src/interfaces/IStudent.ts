@@ -3,6 +3,7 @@ export type IGetStudentProfile = (id: string) => IStudentProfile;
 export type IUpdateStudentProfile = (id: string, profile: any) => IStudentProfile;
 
 export interface IStudentProfile {
+  id: string;
   first_name: string;
   last_name: string;
   about: string;

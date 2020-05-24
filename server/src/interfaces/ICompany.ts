@@ -2,11 +2,20 @@ export type IGetCompanyInfo = (id: string) => ICompanyInfo;
 
 export type IGetCompanyAnalyticsDownload = (id: string) => IAnalyticsFile;
 
-export type IGetCompanyAnalytics = (id: string) => [IAnalytics];
+export type IGetCompanyAnalytics = (id: string) => ICompanyAnalytics;
 
 export type IUpdateCompanyInfo = (id: string, info: any) => ICompanyInfo;
 
+export interface ICompanyAnalytics {
+  data: [IAnalytics]
+}
+
+export interface ICompanyAnalyticsDownload {
+  file: IAnalyticsFile
+}
+
 export interface IAnalytics {
+  id: string;
   first_name: string;
   last_name: string;
   about: string;

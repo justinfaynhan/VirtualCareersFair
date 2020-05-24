@@ -1,6 +1,11 @@
-export type IGetCareersFairLanding = () => [ICareersFairLandingCompany];
+export type IGetCareersFairLanding = () => ICareersFairLanding;
+
+export interface ICareersFairLanding {
+  companies: [ICareersFairLandingCompany]
+}
 
 export interface ICareersFairLandingCompany {
+  id: string,
   name: string;
   logo: any;
   banner_image: any;

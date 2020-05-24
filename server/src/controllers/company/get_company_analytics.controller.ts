@@ -8,7 +8,7 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
     }
     try {
       const id = httpRequest.params.id;
-      const analytics: [IAnalytics] = await getCompanyAnalytics(id);
+      const analytics = await getCompanyAnalytics(id);
       return {
         headers,
         statusCode: 200,

@@ -9,7 +9,7 @@ const makeUpdateCompanyInfo = (updateCompanyInfo: IUpdateCompanyInfo) => {
     try {
       const id = httpRequest.params.id;
       const info = httpRequest.params.body;
-      const new_info: ICompanyInfo = await updateCompanyInfo(id, info);
+      const new_info = await updateCompanyInfo(id, info);
       return {
         headers,
         statusCode: 200,

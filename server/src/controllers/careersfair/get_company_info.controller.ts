@@ -8,7 +8,7 @@ const makeGetCompanyInfo = (getCompanyInfo: IGetCompanyInfo) => {
     }
     try {
       const id: string = httpRequest.params.id;
-      const companyInfo: ICompanyInfo = await getCompanyInfo(id);
+      const companyInfo = await getCompanyInfo(id);
       return {
         headers,
         statusCode: 200,

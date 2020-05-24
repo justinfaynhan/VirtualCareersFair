@@ -1,10 +1,17 @@
-export type IGetUsersList = (type: string) => [IAdminCompany | IAdminStudent];
+export type IGetUsersList = (type: string) => IUsersList;
 
-export type IInviteUser = (type: string, email?: string) => IInviteCode;
+export type IInviteUser = (type: string, email?: string) => IInvite;
 
-export type IInviteCode = string;
+export interface IInvite {
+  invite_code: string
+}
 
+export interface IUsersList {
+  type: string;
+  list: [IAdminCompany | IAdminStudent]
+}
 export interface IAdminCompany {
+  id: string;
   name: string;
   email: string;
   filled_info: boolean;
@@ -12,6 +19,7 @@ export interface IAdminCompany {
 }
 
 export interface IAdminStudent {
+  id: string;
   first_name: string;
   last_name: string;
   completed_profile: string;

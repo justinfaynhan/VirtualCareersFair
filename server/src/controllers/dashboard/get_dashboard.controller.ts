@@ -8,7 +8,7 @@ const makeGetDashboardInfo = (getDashboard: IGetDashboard) => {
     }
     try {
       const type: string = httpRequest.params.type;
-      const dashboard: IDashboard= await getDashboard(type);
+      const dashboard = await getDashboard(type);
       return {
         headers,
         statusCode: 200,

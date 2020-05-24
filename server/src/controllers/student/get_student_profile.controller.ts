@@ -8,7 +8,7 @@ const makeGetStudentProfile = (getStudentProfile: IGetStudentProfile) => {
     }
     try {
       const id: string = httpRequest.params.id;
-      const profile: IStudentProfile= await getStudentProfile(id);
+      const profile = await getStudentProfile(id);
       return {
         headers,
         statusCode: 200,

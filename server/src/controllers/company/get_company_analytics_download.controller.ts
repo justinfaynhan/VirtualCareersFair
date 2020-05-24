@@ -8,7 +8,7 @@ const makeGetCompanyAnalyticsDownload = (getCompanyAnalyticsDownload: IGetCompan
     }
     try {
       const id = httpRequest.params.id
-      const analytics: IAnalyticsFile = await getCompanyAnalyticsDownload(id);
+      const analytics = await getCompanyAnalyticsDownload(id);
       return {
         headers,
         statusCode: 200,
