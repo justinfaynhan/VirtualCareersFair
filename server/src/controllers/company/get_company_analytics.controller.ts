@@ -7,7 +7,7 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
       'Content-Type': 'application/json'
     }
     try {
-      const id = httpRequest.params.id
+      const id = httpRequest.params.id;
       const analytics: [IAnalytics] = await getCompanyAnalytics(id);
       return {
         headers,

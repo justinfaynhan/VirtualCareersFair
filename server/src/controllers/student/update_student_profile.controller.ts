@@ -9,11 +9,11 @@ const makeUpdateStudentProfile = (updateStudentProfile: IUpdateStudentProfile) =
     try {
       const id: string = httpRequest.params.id;
       const profile: any = httpRequest.body;
-      const new_profile: IStudentProfile= await updateStudentProfile(id, profile);
+      const new_profile: IStudentProfile = await updateStudentProfile(id, profile);
       return {
         headers,
         statusCode: 200,
-        body: profile
+        body: new_profile
       }
     } catch (e) {
       // TODO: Error logging

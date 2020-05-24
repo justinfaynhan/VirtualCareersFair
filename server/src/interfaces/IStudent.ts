@@ -6,7 +6,7 @@ export interface IStudentProfile {
   first_name: string;
   last_name: string;
   about: string;
-  skills: any;
+  skills: Array<string>;
   uni: string;
   degree: string;
   resume_link?: string;

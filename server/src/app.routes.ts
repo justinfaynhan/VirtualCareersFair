@@ -60,22 +60,22 @@ export class Login extends Controller {
 export class CareersFair extends Controller {
   /**Get the careers fair home page
    * 
-   * Request token must be authorized as any account of any type.
+   * Request user_token must be authorized as any account of any type.
    */
   @Get()
   public async get(
-    @Query() token: string,
+    @Query() user_token: string,
     @Request() request: express.Request
   ): Promise<any> {
     return makeCallback(getCareersFairLanding)(request);
   }
   /**Get a specific company landing page signed up to the careers fair.
    * 
-   * Request token must be authorized as any account of any type.
+   * Request user_token must be authorized as any account of any type.
    */
-  @Get('company/{id}')
+  @Get('company/:id')
   public async getCompany(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('id') id: string,
     @Request() request: express.Request
   ): Promise<any> {
@@ -88,15 +88,15 @@ export class DashboardInfo extends Controller {
   /**Get the dashboard info interface associated with the requested type.
    * 
    * The requested {type} parameter must be of either 'admin' | "student' | 
-   * 'company', which will be cross checked with the associated token user 
+   * 'company', which will be cross checked with the associated user_token user 
    * account privileges for authorization.
    * 
    * Only tokens authorized as admins can get the dashboard info of other 
    * account types.
    */
-  @Get('{type}')
+  @Get(':type')
   public async get(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('type') type: string,
     @Request() request: express.Request
   ): Promise<any> {
@@ -108,11 +108,11 @@ export class DashboardInfo extends Controller {
 export class Student extends Controller {
   /**Get a student's profile information.
    * 
-   * Request token must be authorized as any account of any type.
+   * Request user_token must be authorized as any account of any type.
    */
   @Get('{id}')
   public async get(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('id') id: string,
     @Request() request: express.Request
   ): Promise<any> {
@@ -120,17 +120,17 @@ export class Student extends Controller {
   }
   /**Update a student's profile information.
    * 
-   * Request token must be authorized as the student of same id.
+   * Request user_token must be authorized as the student of same id.
    */
-  @Put('{id}')
+  @Put(':id')
   public async put(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('id') id: string,
     @Body() new_profile: {
       first_name: string;
       last_name: string;
       about: string;
-      skills: any;
+      skills: Array<string>;
       uni: string;
       degree: string;
       resume_link?: string;
@@ -148,20 +148,20 @@ export class Student extends Controller {
 export class Company extends Controller {
   /**Update a specific company landing page information.
    * 
-   * Request token must be authorized as the company of same id. 
+   * Request user_token must be authorized as the company of same id. 
    */
-  @Put('{id}')
+  @Put(':id')
   public async put(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('id') id: string,
     @Body() new_info: {
       id: string;
       name: string;
-      overview: any;
-      graduate_stories: any;
-      videos: any;
+      overview: string;
+      graduate_stories: Array<string>;
+      videos: string;
       website: string;
-      contact_info: any;
+      contact_info: string;
     },
     @Request() request: express.Request
   ): Promise<any> {
@@ -169,23 +169,24 @@ export class Company extends Controller {
   }
   /**Get a list of users that have browsed the company landing page.
    * 
-   * Request token must be authorized as the company of same id. 
+   * Request user_token must be authorized as the company of same id. 
    */
-  @Get('{id}/analytics')
+  @Get(':id/analytics')
   public async getAnalytics(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('id') id: string,
     @Request() request: express.Request
   ): Promise<any> {
+    console.log('hello');
     return makeCallback(getCompanyAnalytics)(request);
   }
   /**Download a .csv list of users that have browsed the company landing page.
    * 
-   * Request token must be authorized as the company of same id. 
+   * Request user_token must be authorized as the company of same id. 
    */
-  @Get('{id}/analytics/download')
-  public async getAnalyticsDownload(
-    @Query() token: string,
+  @Post(':id/analytics')
+  public async postAnalyticsDownload(
+    @Query() user_token: string,
     @Path('id') id: string,
     @Request() request: express.Request
   ): Promise<any> {
@@ -200,11 +201,11 @@ export class Admin extends Controller {
    * The requested {type} parameter must be of either 'admin' | "student' | 
    * 'company'.
    * 
-   * Request token must be authorized as admin.
+   * Request user_token must be authorized as admin.
    */
-  @Get('users/{type}')
+  @Get('users/:type')
   public async getUsers(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('type') type: string,
     @Request() request: express.Request
   ): Promise<any> {
@@ -216,11 +217,11 @@ export class Admin extends Controller {
    * The requested {type} parameter must be of either 'admin' | "student' | 
    * 'company'.
    * 
-   * Request token must be authorized as admin.
+   * Request user_token must be authorized as admin.
    */
-  @Post('invite/{type}')
+  @Post('invite/:type')
   public async postInvite(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('type') type: string,
     @Request() request: express.Request
   ): Promise<any> {
@@ -231,15 +232,15 @@ export class Admin extends Controller {
    * The requested {type} parameter must be of either 'admin' | "student' | 
    * 'company'.
    * 
-   * Request token must be authorized as admin.
+   * Request user_token must be authorized as admin.
    */
-  @Put('info/{type}')
+  @Put('info/:type')
   public async putInfo(
-    @Query() token: string,
+    @Query() user_token: string,
     @Path('type') type: string,
     @Body() new_info: {
-      instructions: any;
-      about_us: any;
+      instructions: string;
+      about_us: string;
     },
     @Request() request: express.Request
   ): Promise<any> {

@@ -5,6 +5,8 @@ import * as swaggerUi from 'swagger-ui-express';
 import { RegisterRoutes } from "./routes";
 
 import config from 'config'
+import requestLogger from 'middleware/request_logger';
+
 const app = express();
 
 app.use(
@@ -13,6 +15,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(requestLogger);
 
 RegisterRoutes(app);
 
