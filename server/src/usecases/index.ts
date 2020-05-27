@@ -5,11 +5,11 @@ import {IGetCareersFairLanding} from 'interfaces/ICareersFair';
 import {IGetCompanyAnalytics, IGetCompanyInfo, IUpdateCompanyInfo, IGetCompanyAnalyticsDownload} from 'interfaces/ICompany';
 import {IGetStudentProfile, IUpdateStudentProfile} from 'interfaces/IStudent';
 
-export const addUser: IRegister = (username, password, invite_code) => ({
+export const registerUser: IRegister = (username, password, invite_code) => ({
   user_token: '324u32i4n32i4n32iniubsdi'
 });
 
-export const getUser: ILogin = (username, password) => ({
+export const loginUser: ILogin = (username, password) => ({
   user_token: 'sadnijwqrnirn32irj32ir32jj'
 });
 
