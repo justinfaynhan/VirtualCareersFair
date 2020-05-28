@@ -5,6 +5,7 @@ const makeGetCompany = (companyDb) => {
     return {
       id: 'sadsadsadsa',
       name: 'jojo',
+      slogan: 'your next move is',
       overview: 'bizzare adventures',
       graduate_stories: ['wow'],
       videos: 'www.youtube.com',

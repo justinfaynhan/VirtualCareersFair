@@ -5,6 +5,7 @@ const makeUpdateCompany = (companyDb) => {
     return {
       id: 'sadsadsadsa',
       name: 'jojo',
+      slogan: 'oraoraora',
       overview: 'bizzare adventures',
       graduate_stories: ['wow'],
       videos: 'www.youtube.com',

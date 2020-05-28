@@ -23,6 +23,7 @@ export type IAnalyticsFile = any;
 export interface ICompanyInfo {
   id: string;
   name: string;
+  slogan: string;
   overview: any;
   graduate_stories: any;
   videos: any;
