@@ -4,6 +4,8 @@ import {IAnalytics} from 'interfaces/ICompany';
 export class Company extends User {
   _sanitizer: (text: string) => string;
 
+  _name: string | null;
+  _slogan: string | null;
   _overview: string | null;
   _graduate_stories: string | null;
   _website_link: string | null;
@@ -23,6 +25,8 @@ export class Company extends User {
     super(id, hash);
     this._sanitizer = sanitizer;
 
+    this._name = null;
+    this._slogan = null;
     this._overview = null;
     this._graduate_stories = null;
     this._website_link = null;
@@ -33,6 +37,18 @@ export class Company extends User {
     this._taking_interns = null;
     this._taking_graduates = null;
     this._page_analytics = null;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(name: string) {
+
+  }
+  get slogan() {
+    return this._slogan;
+  }
+  set slogan(slogan: string) {
+    
   }
   get overview() {
     return this._overview;
