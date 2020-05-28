@@ -13,7 +13,7 @@ import {
   Put
 } from "tsoa";
 
-import makeCallback from 'callback';
+import makeCallback from 'utils/callback';
 import {IHttpResponse} from 'interfaces/IHttp';
 import {IStudentProfile} from 'interfaces/IStudent'
 

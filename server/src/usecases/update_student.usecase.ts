@@ -1,9 +1,9 @@
-import {IGetStudentProfile} from 'interfaces/IStudent';
+import {IUpdateStudentProfile} from 'interfaces/IStudent';
 
-const makeGetStudent = (userDb) => {
-  const getStudent: IGetStudentProfile = async (id: string) => {
+const makeUpdateStudent = (userDb) => {
+  const updateStudent: IUpdateStudentProfile = async (id, profile) => {
     return {
-      id: 'jerkfdsfoewnroew',
+      id: 'sadjnwqnjewnrewrew',
       first_name: 'hihi',
       last_name: 'hehe',
       about: 'my name is hihi hehhe and I would like a job ty',
@@ -14,9 +14,9 @@ const makeGetStudent = (userDb) => {
       linkedin_link: 'https://www.linkedin.com',
       github_link: 'https://www.github.com',
       portfolio_link: 'https://www.hihihihehehe.io',
-    }
+    };
   }
-  return getStudent;
+  return updateStudent;
 }
 
-export default makeGetStudent;
+export default makeUpdateStudent;

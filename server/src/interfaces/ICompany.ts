@@ -1,13 +1,13 @@
-export type IGetCompanyInfo = (id: string) => ICompanyInfo;
+export type IGetCompanyInfo = (id: string) => Promise<ICompanyInfo>;
 
-export type IGetCompanyAnalyticsDownload = (id: string) => IAnalyticsFile;
+export type IGetCompanyAnalyticsDownload = (id: string) => Promise<IAnalyticsFile>;
 
-export type IGetCompanyAnalytics = (id: string) => ICompanyAnalytics;
+export type IGetCompanyAnalytics = (id: string) => Promise<ICompanyAnalytics>;
 
-export type IUpdateCompanyInfo = (id: string, info: any) => ICompanyInfo;
+export type IUpdateCompanyInfo = (id: string, info: any) => Promise<ICompanyInfo>;
 
 export interface ICompanyAnalytics {
-  data: [IAnalytics]
+  data: Array<IAnalytics>
 }
 
 export interface ICompanyAnalyticsDownload {
@@ -16,16 +16,6 @@ export interface ICompanyAnalyticsDownload {
 
 export interface IAnalytics {
   id: string;
-  first_name: string;
-  last_name: string;
-  about: string;
-  skills: any;
-  uni: string;
-  degree: string;
-  resume_link?: string;
-  linkedin_link?: string;
-  github_link?: string;
-  portfolio_link?: string;
 }
 
 export type IAnalyticsFile = any;

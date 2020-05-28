@@ -1,7 +1,7 @@
-export type IGetCareersFairLanding = () => ICareersFairLanding;
+export type IGetCareersFairLanding = () => Promise<ICareersFairLanding>;
 
 export interface ICareersFairLanding {
-  companies: [ICareersFairLandingCompany]
+  companies: Array<ICareersFairLandingCompany>
 }
 
 export interface ICareersFairLandingCompany {

@@ -1,6 +1,6 @@
-export type IGetUsersList = (type: string) => IUsersList;
+export type IGetUsersList = (type: string) => Promise<IUsersList>;
 
-export type IInviteUser = (type: string, email?: string) => IInvite;
+export type IInviteUser = (type: string, email?: string) => Promise<IInvite>;
 
 export interface IInvite {
   invite_code: string
@@ -8,7 +8,7 @@ export interface IInvite {
 
 export interface IUsersList {
   type: string;
-  list: [IAdminCompany | IAdminStudent]
+  list: Array<IAdminCompany> | Array<IAdminStudent>
 }
 export interface IAdminCompany {
   id: string;

@@ -1,6 +1,6 @@
-export type IGetStudentProfile = (id: string) => IStudentProfile;
+export type IGetStudentProfile = (id: string) => Promise<IStudentProfile>;
 
-export type IUpdateStudentProfile = (id: string, profile: any) => IStudentProfile;
+export type IUpdateStudentProfile = (id: string, profile: any) => Promise<IStudentProfile>;
 
 export interface IStudentProfile {
   id: string;
