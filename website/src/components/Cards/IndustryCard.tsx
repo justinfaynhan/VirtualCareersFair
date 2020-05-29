@@ -11,15 +11,17 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 345,
+      textAlign: "left",
     },
     media: {
-      height: 140,
+      height: 100,
     },
 });
 
-function IndustryCard() {
+const IndustryCard = (props: any) => {
     const classes = useStyles();
+    console.log(props.company);
+    console.log(props.description);
 
     return (
         <Card className={classes.root}>
@@ -33,7 +35,8 @@ function IndustryCard() {
                         Company A
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Description of Company A
+                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+            across all continents except Antarctica
                     </Typography>
                 </CardContent>
             </CardActionArea>

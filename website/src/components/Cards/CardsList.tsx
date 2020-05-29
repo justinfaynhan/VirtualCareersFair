@@ -13,16 +13,20 @@ const useStyles = makeStyles({
 });
 
 function CardList() {
-    const classes = useStyles();
-    const items = [];
+    const style = useStyles;
+    const items = [1, 2, 3, 4, 5, 6, 7, 8];
 
     return (
-        <Grid container spacing={3}>
-            {items.map((value, index) => {
-                <Grid item sm={3}>
-                    <IndustryCard />
+        <Grid container>
+            <Grid item sm={10}>
+                <Grid container spacing={5}>
+                {items.map((value, index) => 
+                    <Grid item sm={4}>
+                        <IndustryCard company={value} description="hello" key={index}/>
+                    </Grid>
+                )}
                 </Grid>
-            })}
+            </Grid>
         </Grid>
     );
 }
