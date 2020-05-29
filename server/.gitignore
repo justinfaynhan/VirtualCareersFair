@@ -1,3 +1,7 @@
+# Custom
+src/routes.ts
+src/swagger.json
+
 lib-cov
 *.seed
 *.log
