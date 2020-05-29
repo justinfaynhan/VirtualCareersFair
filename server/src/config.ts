@@ -1,14 +1,19 @@
 interface IServerConfig {
   PORT: string | number;
   DB: {
-    URI: string;
+    URL: string;
+    options: {}
   }
 }
 
 const ServerConfig: IServerConfig = {
   PORT: process.env.VCF_PORT || 3000,
   DB: {
-    URI: process.env.VCF_DB_URI || ''
+    URL: process.env.VCF_DB_URL || 'mongodb://localhost:27017/',
+    options: {
+      dbName: 'vcf',
+      useNewUrlParser: true,
+    }
   }
 }
 
