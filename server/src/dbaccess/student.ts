@@ -1,26 +1,40 @@
-export const makeStudentDb = (makeDb) => {
-  const findOne = () => {
+import {IMakeDb} from 'interfaces/db';
 
+export const makeStudentDb = (makeDb: IMakeDb) => {
+  const findById = async ({id: _id}) => {
+    const db = await makeDb();
+    const res = await (db.collection('Students').findOne({_id}));
+    return res;    
   };
-  const findAll = () => {
-
+  const findAll = async () => {
+    const db = await makeDb();
+    const res = db.collection('Students').find({});
+    return (await res.toArray()).map(({_id: id, ...found}) => ({
+      id,
+      ...found
+    }))
   };
-
-  const update = () => {
-
+  const findByEmail = async ({email}) => {
+    const db = await makeDb();
+    const res = await (db.collection('Students').findOne({email}));
+    return res;
+  }
+  const updateOne = async ({id: _id, ...studentInfo}) => {
+    const db = await makeDb();
+    const res = await db.collection('Students').findOneAndUpdate({_id}, studentInfo, {returnOriginal: false});
+    return res;
   };
-  const insert = () => {
-
-  };
-  const remove = () => {
-
+  const insert = async ({...studentInfo}) => {
+    const db = await makeDb();
+    const res = await db.collection('Students').insertOne({...studentInfo});
+    return res;
   };
   return Object.freeze({
-    findOne,
+    findById,
     findAll,
-    update,
+    findByEmail,
+    updateOne,
     insert,
-    remove
   })
 };
 

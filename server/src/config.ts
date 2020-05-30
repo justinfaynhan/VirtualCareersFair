@@ -13,6 +13,8 @@ const ServerConfig: IServerConfig = {
     options: {
       dbName: 'vcf',
       useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
     }
   }
 }

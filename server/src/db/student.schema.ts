@@ -1,18 +1,5 @@
 import mongoose, {Schema} from 'mongoose';
-import {IUser, User} from 'db/base';
-
-export interface IStudent extends IUser {
-  first_name: string;
-  last_name: string;
-  about: string;
-  skills: string;
-  uni: string;
-  degree: string;
-  resume_link: string;
-  linkedin_link: string;
-  github_link: string;
-  portfolio_link: string;
-};
+import {User} from 'db/base.schema';
 
 export const Student = {
   ...User,
@@ -28,4 +15,4 @@ export const Student = {
   portfolio_link: {type: String}
 };
 
-export const StudentSchema = new Schema(Student);
+export const StudentSchema = new Schema(Student).index({first_name: 1, last_name: 1});

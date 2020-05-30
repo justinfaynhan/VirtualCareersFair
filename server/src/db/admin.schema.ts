@@ -1,8 +1,5 @@
 import mongoose, {Schema} from 'mongoose';
-import {IUser, User} from 'db/base';
-
-export interface IAdmin extends IUser {
-}
+import {User} from 'db/base.schema';
 
 export const Admin = {
   ...User,

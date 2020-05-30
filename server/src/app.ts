@@ -6,6 +6,7 @@ import { RegisterRoutes } from "./routes";
 
 import config from 'config'
 import requestLogger from 'middleware/request_logger';
+import setupDb from 'db';
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(requestLogger);
 RegisterRoutes(app);
 
 const port = config.PORT;
+
+setupDb();
 
 try {
 	const swaggerDocument = require('./swagger.json');

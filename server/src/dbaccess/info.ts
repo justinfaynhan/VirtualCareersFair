@@ -1,24 +1,19 @@
-export const makeInfoDb = (infoDb) => {
-  const findOne = () => {
+import {IMakeDb} from 'interfaces/db';
 
+export const makeInfoDb = (makeDb: IMakeDb) => {
+  const find = async () => {
+    const db = await makeDb();
+    const res = await (db.collection('Infos').findOne({}));
+    return res;
   };
-  const findAll = () => {
-
-  };
-
-  const update = () => {
-
-  };
-  const insert = () => {
-
-  };
-  const remove = () => {
-
+  const upsert = async ({id: _id, ...info}) => {
+    const db = await makeDb();
+    const res = await db.collection('Companies').findOneAndUpdate({_id}, info, {returnOriginal: false, upsert: true});
+    return res;
   };
   return Object.freeze({
-    findOne,
-    update,
-    insert,
+    find,
+    upsert
   })
 };
 

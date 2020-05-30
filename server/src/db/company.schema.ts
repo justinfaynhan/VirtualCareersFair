@@ -1,25 +1,9 @@
 import mongoose, {Schema} from 'mongoose';
-import {IUser, User} from 'db/base';
-import {IAnalytics} from 'interfaces/ICompany';
-
-export interface ICompany extends IUser {
-  name: string;
-  slogan: string;
-  overview: string;
-  graduate_stories: string;
-  website_link: string;
-  contact_email: string;
-  video: string;
-  banner_image: string;
-  logo_image: string;
-  taking_interns: boolean;
-  taking_graduates: boolean;
-  page_analytics: Array<IAnalytics>
-};
+import {User} from 'db/base.schema';
 
 export const Company = {
   ...User,
-  name: {type: String},
+  name: {type: String, index: true},
   slogan: {type: String},
   overview: {type: String},
   graduate_stories: {type: String},

@@ -10,7 +10,7 @@ import makeUserDb from 'dbaccess/user';
 
 const db = mongoose.createConnection();
 
-export const makeDb = () => {
+export const makeDb = async () => {
   if (db.readyState !== 1) {
     db.openUri(config.DB.URL, config.DB.options);
   }

@@ -8,4 +8,4 @@ yarn start
 
 Swagger API Documentation hosted on '/' path.
 
-[Resolving absolute pathing](https://github.com/nestjs/typescript-starter/issues/74#issuecomment-522800484)
+[MongoDB setup](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
