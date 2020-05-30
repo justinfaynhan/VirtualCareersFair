@@ -16,5 +16,3 @@ export const Info = {
 }
 
 export const InfoSchema = new Schema(Info);
-
-export default mongoose.model<IInfo>('Info', InfoSchema);

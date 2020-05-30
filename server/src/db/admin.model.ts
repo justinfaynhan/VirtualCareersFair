@@ -9,5 +9,3 @@ export const Admin = {
 }
 
 export const AdminSchema = new Schema(Admin);
-
-export default mongoose.model<IAdmin>('Admin', AdminSchema);

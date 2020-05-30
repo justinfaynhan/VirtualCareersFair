@@ -34,5 +34,3 @@ export const Company = {
 };
 
 export const CompanySchema = new Schema(Company);
-
-export default mongoose.model<ICompany>('Company', CompanySchema);

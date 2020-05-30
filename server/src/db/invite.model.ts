@@ -14,5 +14,3 @@ export const Invite = {
 }
 
 export const InviteSchema = new Schema(Invite);
-
-export default mongoose.model<IInvite>('Invite', InviteSchema);
