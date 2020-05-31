@@ -3,6 +3,9 @@ interface IServerConfig {
   DB: {
     URL: string;
     options: {}
+  };
+  AUTH: {
+    salt_rounds: string | number;
   }
 }
 
@@ -16,6 +19,9 @@ const ServerConfig: IServerConfig = {
       useUnifiedTopology: true,
       useCreateIndex: true
     }
+  },
+  AUTH: {
+    salt_rounds: 10,
   }
 }
 

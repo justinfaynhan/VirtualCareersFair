@@ -1,30 +1,33 @@
-import Base from 'entities/base.entity';
+import Base, {IBaseConstructor} from 'entities/base.entity';
+
+export interface IUserConstructor extends IBaseConstructor {
+  hash: (password: string) => Promise<string>;
+  email_validate: (email: string) => boolean;
+}
 
 export class User extends Base {
-  _id: () => number | string;
-  _hash: (password: string) => string;
+  protected _hash: (password: string) => Promise<string>;
+  protected _email_validate: (email: string) => boolean;
 
-  _email: string | null;
-  _password: string | null;
+  protected _email: string | null;
+  protected _password: string | null;
 
-  constructor(id: () => number|string , hash: (password: string) => string) {
-    super();
-    this._id = id;
-    this._hash = hash;
+  constructor(args: IUserConstructor) {
+    super({id_gen: args.id_gen});
+    this._hash = args.hash;
+    this._email_validate = args.email_validate;
+
     this._email = null;
     this._password = null;
   }
   get email() {
     return this._email;
   }
-  set email(email: string) {
-
-  }
   get password() {
     return this._password;
   }
-  set password(password: string) {
-
+  Make(data: any) {
+    throw new Error('Make method not implemented.');
   }
 }
 

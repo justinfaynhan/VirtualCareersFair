@@ -1,18 +1,20 @@
-import Base from 'entities/base.entity';
+import Base, {IBaseConstructor} from 'entities/base.entity';
+import {IInfoEntity} from 'interfaces/entities/IInfo.entity';
 
+export interface IInfoConstructor extends IBaseConstructor {
+  sanitizer: (text: string) => string;
+}
 export class Info extends Base{
-  _sanitizer: (text: string) => string;
+  private _sanitizer: (text: string) => string;
 
-  _about_us: string | null;
-  _student_instructions: string | null;
-  _company_instructions: string | null;
-  _admin_instructions: string | null;
+  private _about_us: string | null;
+  private _student_instructions: string | null;
+  private _company_instructions: string | null;
+  private _admin_instructions: string | null;
 
-  constructor(
-    sanitizer: (text: string) => string
-  ) {
-    super();
-    this._sanitizer = sanitizer;
+  constructor(args: IInfoConstructor) {
+    super({id_gen: args.id_gen});
+    this._sanitizer = args.sanitizer;
     this._about_us = null;
     this._student_instructions = null;
     this._company_instructions = null;
@@ -21,29 +23,20 @@ export class Info extends Base{
   get about_us() {
     return this._about_us;
   }
-  set about_us(text: string) {
-
-  }
   get student_instructions() {
     return this._student_instructions;
-  }
-  set student_instructions(text: string) {
-
   }
   get company_instructions() {
     return this._company_instructions;
   }
-  set company_instructions(text: string) {
-
-  }
   get admin_instructions() {
     return this._admin_instructions;
   }
-  set admin_instructions(text: string) {
-
-  }
-  Make() {
-
+  Make(data: Omit<IInfoEntity, '_id'|'created_at'|'updated_at'>) {
+    this._about_us = this._sanitizer(data.about_us);
+    this._student_instructions = this._sanitizer(data.student_instructions);
+    this._company_instructions = this._sanitizer(data.company_instructions);
+    this._admin_instructions = this._sanitizer(data.admin_instructions);
   }
 }
 

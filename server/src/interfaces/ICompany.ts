@@ -16,16 +16,23 @@ export interface ICompanyAnalyticsDownload {
 
 export interface IAnalytics {
   id: string;
+  created_at: Date | string | number;
 }
 
 export type IAnalyticsFile = any;
 
+export interface IGraduateStory {
+  name: string;
+  role: string;
+  summary: string;
+  story: string;
+}
 export interface ICompanyInfo {
   id: string;
   name: string;
   slogan: string;
   overview: any;
-  graduate_stories: any;
+  graduate_stories: Array<IGraduateStory>;
   videos: any;
   website: string;
   contact_info: any;

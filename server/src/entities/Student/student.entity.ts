@@ -1,26 +1,26 @@
-import User from 'entities/User/user.entity';
+import User, {IUserConstructor} from 'entities/User/user.entity';
+import {IStudentEntity} from 'interfaces/entities/IStudent.entity';
 
+export interface IStudentConstructor extends IUserConstructor {
+  sanitizer: (text: string) => string;
+}
 export class Student extends User {
-  _sanitizer: (text: string) => string;
+  private _sanitizer: (text: string) => string;
 
-  _first_name: string | null;
-  _last_name: string | null;
-  _about: string | null;
-  _skills: string | null;
-  _uni: string | null;
-  _degree: string | null;
-  _resume_link?: string | null;
-  _linkedin_link?: string | null;
-  _github_link?: string | null;
-  _portfolio_link?: string | null;
+  private _first_name: string | null;
+  private _last_name: string | null;
+  private _about: string | null;
+  private _skills: Array<string> | null;
+  private _uni: string | null;
+  private _degree: string | null;
+  private _resume_link?: string | null;
+  private _linkedin_link?: string | null;
+  private _github_link?: string | null;
+  private _portfolio_link?: string | null;
 
-  constructor(
-    id: () => number|string, 
-    hash: (password: string) => string, 
-    sanitizer: (text: string) => string
-  ) {
-    super(id, hash);
-    this._sanitizer = sanitizer;
+  constructor(args: IStudentConstructor) {
+    super({id_gen: args.id_gen, hash: args.hash, email_validate: args.email_validate});
+    this._sanitizer = args.sanitizer;
 
     this._first_name = null;
     this._last_name = null;
@@ -36,66 +36,56 @@ export class Student extends User {
   get first_name() {
     return this._first_name;
   }
-  set first_name(first_name: string) {
-
-  }
   get last_name() {
     return this._last_name;
-  }
-  set last_name(last_name: string) {
-
   }
   get about() {
     return this._about;
   }
-  set about(about: string) {
-
-  }
   get skills() {
     return this._skills;
-  }
-  set skills(skills: string) {
-
   }
   get uni() {
     return this._uni;
   }
-  set uni(uni: string) {
-
-  }
   get degree() {
     return this._degree;
-  }
-  set degree(degree: string) {
-
   }
   get resume_link() {
     return this._resume_link;
   }
-  set resume_link(link: string) {
-
-  }
   get linkedin_link() {
     return this._linkedin_link;
-  }
-  set linkedin_link(link: string) {
-
   }
   get github_link() {
     return this._github_link;
   }
-  set github_link(link: string) {
-
-  }
   get portfolio_link() {
     return this._portfolio_link;
   }
-  set portfolio_link(link: string) {
-
+  async Make(data: Omit<IStudentEntity, '_id'|'created_at'|'updated_at'>) {
+    if (this._email_validate(data.email)) {
+      this._email = data.email;
+    } else {
+      throw new Error(`Error, '${data.email}' is an invalid email address.`)
+    }
+    try {
+      this._password = await this._hash(data.password);
+    } catch {
+      throw new Error(`Error, failed to hash ${data.password}.`)
+    }
+    this._first_name = this._sanitizer(data.first_name);
+    this._last_name = this._sanitizer(data.last_name);
+    this._about = this._sanitizer(data.about);
+    this._skills = data.skills.map((skill) => this._sanitizer(skill));
+    this._uni = this._sanitizer(data.uni);
+    this._degree = this._sanitizer(data.degree);
+    this._resume_link = this._sanitizer(data.resume_link);
+    this._linkedin_link = this._sanitizer(data.linkedin_link);
+    this._github_link = this._sanitizer(data.github_link);
+    this._portfolio_link = this._sanitizer(data.portfolio_link);
   }
-  Make() {
 
-  }
 }
 
 export default Student;

@@ -1,5 +1,7 @@
+import sanitizeHtml from 'sanitize-html';
+
 export const sanitizer = (text: string) => {
-  return 'sanitized';
+  return sanitizeHtml(text, {});
 }
 
 export default sanitizer;
