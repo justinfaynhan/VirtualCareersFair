@@ -42,6 +42,16 @@ export class Invite extends Base {
     this._expiry = expiry;
     return this;
   }
+  Fetch() {
+    return {
+      id: this._id,
+      created_at: this._created_at,
+      updated_at: this._updated_at,
+      code: this._code,
+      privilege: this._privilege,
+      expiry: this._expiry
+    };
+  }
 }
 
 export default Invite;

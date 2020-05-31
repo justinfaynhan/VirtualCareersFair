@@ -14,7 +14,15 @@ export class Base {
     this._created_at = new Date().toISOString();
     this._updated_at = new Date().toISOString();
   }
-
+  get id() {
+    return this._id;
+  }
+  get created_at() {
+    return this._created_at;
+  }
+  get updated_at() {
+    return this._updated_at;
+  }
   Make({}: any) {
     throw new Error('Make method not implemented.');
   }

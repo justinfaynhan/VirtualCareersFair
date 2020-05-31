@@ -130,6 +130,27 @@ export class Company extends User {
     this._page_analytics = page_analytics;
     return this;
   }
+  Fetch() {
+    return {
+      id: this._id,
+      created_at: this._created_at,
+      updated_at: this._updated_at,
+      email: this._email,
+      password: this._password,
+      name: this._name,
+      slogan: this._slogan,
+      overview: this._overview,
+      graduate_stories: this._graduate_stories,
+      website_link: this._website_link,
+      contact_email: this._contact_email,
+      video: this._video,
+      banner_image: this._banner_image,
+      logo_image: this._logo_image,
+      taking_interns: this._taking_interns,
+      taking_graduates: this._taking_graduates,
+      page_analytics: this._page_analytics
+    };
+  }
 }
 
 export default Company;

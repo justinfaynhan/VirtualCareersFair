@@ -1,7 +1,7 @@
 import {IMakeStudentDb} from 'interfaces/dbaccess/IStudentDb';
 
 export const makeStudentDb: IMakeStudentDb = (makeDb) => {
-  const findById = async ({id: _id}) => {
+  const findById = async ({_id}) => {
     const db = await makeDb();
     const res = await (db.collection('Students').findOne({_id}));
     return res;    
@@ -19,12 +19,12 @@ export const makeStudentDb: IMakeStudentDb = (makeDb) => {
     const res = await (db.collection('Students').findOne({email}));
     return res;
   }
-  const updateOne = async ({id: _id, ...studentInfo}) => {
+  const updateOne = async ({_id, ...studentInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Students').findOneAndUpdate({_id}, studentInfo, {returnOriginal: false});
     return res;
   };
-  const insert = async ({...studentInfo}) => {
+  const insertOne = async ({...studentInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Students').insertOne({...studentInfo});
     return res;
@@ -34,7 +34,7 @@ export const makeStudentDb: IMakeStudentDb = (makeDb) => {
     findAll,
     findByEmail,
     updateOne,
-    insert,
+    insertOne,
   })
 };
 

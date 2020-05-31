@@ -25,5 +25,14 @@ export class Admin extends User {
     }
     return this;
   }
+  Fetch() {
+    return {
+      id: this._id,
+      created_at: this._created_at,
+      updated_at: this._updated_at,
+      email: this._email,
+      password: this._password
+    };
+  }
 }
 export default Admin;

@@ -9,7 +9,7 @@ export const makeAdminDb: IMakeAdminDb = (makeDb) => {
       ...found
     }))
   };
-  const findById = async ({id: _id}) => {
+  const findById = async ({_id}) => {
     const db = await makeDb();
     const res = await (db.collection('Admins').findOne({_id}));
     return res;    
@@ -19,7 +19,7 @@ export const makeAdminDb: IMakeAdminDb = (makeDb) => {
     const res = await (db.collection('Admins').findOne({email}));
     return res;
   }
-  const insert = async ({...adminInfo}) => {
+  const insertOne = async ({...adminInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Admins').insertOne({...adminInfo});
     return res;
@@ -28,7 +28,7 @@ export const makeAdminDb: IMakeAdminDb = (makeDb) => {
     findAll,
     findById,
     findByEmail, 
-    insert
+    insertOne
   });
 }
 export default makeAdminDb;

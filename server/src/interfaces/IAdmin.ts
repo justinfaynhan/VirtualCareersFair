@@ -8,13 +8,13 @@ export interface IInvite {
 
 export interface IUsersList {
   type: string;
-  list: Array<IAdminCompany> | Array<IAdminStudent>
+  list: Array<IAdminCompany> | Array<IAdminStudent> | Array<IAdminAdmin>;
 }
 export interface IAdminCompany {
   id: string;
   name: string;
   email: string;
-  filled_info: boolean;
+  filled_info: number;
   contact_info: any;
 }
 
@@ -22,7 +22,12 @@ export interface IAdminStudent {
   id: string;
   first_name: string;
   last_name: string;
-  completed_profile: string;
+  completed_profile: number;
   uni: string;
   degree: string;
+}
+
+export interface IAdminAdmin {
+  id: string;
+  email: string;
 }

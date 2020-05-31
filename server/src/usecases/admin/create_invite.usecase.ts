@@ -1,6 +1,7 @@
 import {IInviteUser} from 'interfaces/IAdmin';
 
-import {IInviteDbAccess} from 'interfaces/dbaccess/IInviteDb';
+import {IInviteDbAccess} from 'interfaces/dbaccess';
+import {IInviteEntity} from 'interfaces/entities'
 
 import {makeInvite} from 'entities/Invite';
 
@@ -9,10 +10,13 @@ const makeCreateInvite = (inviteDb: IInviteDbAccess) => {
     var today = new Date();
     var tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000)).toISOString();
     const invite = makeInvite.Make({privilege: type, expiry: tomorrow});
-    return inviteDb.insert({
+    const res = (await inviteDb.insertOne({
       expiry: invite.expiry,
       privilege: invite.privilege
-    })
+    }) as IInviteEntity);
+    return {
+      invite_code: res.invite_code
+    }
     // return {
     //   invite_code: 'secret'
     // }

@@ -1,7 +1,7 @@
 import {IMakeCompanyDb} from 'interfaces/dbaccess/ICompanyDb';
 
 export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
-  const findById = async ({id: _id}) => {
+  const findById = async ({_id}) => {
     const db = await makeDb();
     const res = await (db.collection('Companies').findOne({_id}));
     return res;    
@@ -19,12 +19,12 @@ export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
     const res = await (db.collection('Companies').findOne({email}));
     return res;
   }
-  const updateOne = async ({id: _id, ...companyInfo}) => {
+  const updateOne = async ({_id, ...companyInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Companies').findOneAndUpdate({_id}, companyInfo, {returnOriginal: false});
     return res;
   };
-  const insert = async ({...companyInfo}) => {
+  const insertOne = async ({...companyInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Companies').insertOne({...companyInfo});
     return res;
@@ -34,7 +34,7 @@ export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
     findAll,
     findByEmail,
     updateOne,
-    insert,
+    insertOne,
   })
 };
 

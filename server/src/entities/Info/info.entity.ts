@@ -44,6 +44,17 @@ export class Info extends Base{
     this._admin_instructions = this._sanitizer(admin_instructions);
     return this;
   }
+  Fetch() {
+    return {
+      id: this._id,
+      created_at: this._created_at,
+      updated_at: this._updated_at,
+      about_us: this._about_us,
+      student_instructions: this._student_instructions,
+      company_instructions: this._company_instructions,
+      admin_instructions: this._admin_instructions,
+    };
+  }
 }
 
 export default Info;
