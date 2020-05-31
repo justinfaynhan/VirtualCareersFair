@@ -1,6 +1,6 @@
-import {IMakeDb} from 'interfaces/db';
+import {IMakeAdminDb} from 'interfaces/dbaccess/IAdminDb';
 
-export const makeAdminDb = (makeDb: IMakeDb) => {
+export const makeAdminDb: IMakeAdminDb = (makeDb) => {
   const findAll = async () => {
     const db = await makeDb();
     const res = db.collection('Admins').find({});

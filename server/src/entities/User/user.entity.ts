@@ -26,7 +26,7 @@ export class User extends Base {
   get password() {
     return this._password;
   }
-  Make(data: any) {
+  Make({}: any) {
     throw new Error('Make method not implemented.');
   }
 }

@@ -32,11 +32,17 @@ export class Info extends Base{
   get admin_instructions() {
     return this._admin_instructions;
   }
-  Make(data: Omit<IInfoEntity, '_id'|'created_at'|'updated_at'>) {
-    this._about_us = this._sanitizer(data.about_us);
-    this._student_instructions = this._sanitizer(data.student_instructions);
-    this._company_instructions = this._sanitizer(data.company_instructions);
-    this._admin_instructions = this._sanitizer(data.admin_instructions);
+  Make({
+    about_us, 
+    student_instructions, 
+    company_instructions, 
+    admin_instructions
+  }: Omit<IInfoEntity, '_id'|'created_at'|'updated_at'>) {
+    this._about_us = this._sanitizer(about_us);
+    this._student_instructions = this._sanitizer(student_instructions);
+    this._company_instructions = this._sanitizer(company_instructions);
+    this._admin_instructions = this._sanitizer(admin_instructions);
+    return this;
   }
 }
 

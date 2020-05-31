@@ -1,7 +1,6 @@
-import {IMakeDb} from 'interfaces/db';
+import {IMakeInviteDb} from 'interfaces/dbaccess/IInviteDb';
 
-
-export const makeInviteDb = (makeDb: IMakeDb) => {
+export const makeInviteDb: IMakeInviteDb = (makeDb) => {
   const findById = async ({id: _id}) => {
     const db = await makeDb();
     const res = await (db.collection('Invites').findOne({_id}));

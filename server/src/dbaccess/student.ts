@@ -1,6 +1,6 @@
-import {IMakeDb} from 'interfaces/db';
+import {IMakeStudentDb} from 'interfaces/dbaccess/IStudentDb';
 
-export const makeStudentDb = (makeDb: IMakeDb) => {
+export const makeStudentDb: IMakeStudentDb = (makeDb) => {
   const findById = async ({id: _id}) => {
     const db = await makeDb();
     const res = await (db.collection('Students').findOne({_id}));

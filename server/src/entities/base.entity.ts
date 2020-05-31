@@ -15,7 +15,7 @@ export class Base {
     this._updated_at = new Date().toISOString();
   }
 
-  Make(data: any) {
+  Make({}: any) {
     throw new Error('Make method not implemented.');
   }
 }

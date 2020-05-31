@@ -29,17 +29,18 @@ export class Invite extends Base {
   get expiry() {
     return this._expiry;
   }
-  Make(data: Omit<IInviteEntity, '_id'|'created_at'|'updated_at'>) {
+  Make({privilege, expiry}: Omit<IInviteEntity, 'invite_code'|'_id'|'created_at'|'updated_at'>) {
     this._code = this._code_gen();
-    if (data.privilege === 'ADMIN' || data.privilege === 'STUDENT' || data.privilege === 'COMPANY') {
-      this._privilege = data.privilege;
+    if (privilege === 'ADMIN' || privilege === 'STUDENT' || privilege === 'COMPANY') {
+      this._privilege = privilege;
     } else {
-      throw new Error(`Error, could not assign invalid privilege type for invite code: ${data.privilege}.`);
+      throw new Error(`Error, could not assign invalid privilege type for invite code: ${privilege}.`);
     }
-    if (!this._is_valid_date(data.expiry)) {
-      throw new Error(`Error, ${data.expiry} is not a valid date for Invite entity.`);
+    if (!this._is_valid_date(expiry)) {
+      throw new Error(`Error, ${expiry} is not a valid date for Invite entity.`);
     }
-    this._expiry = data.expiry;
+    this._expiry = expiry;
+    return this;
   }
 }
 

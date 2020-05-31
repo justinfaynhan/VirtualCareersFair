@@ -77,43 +77,58 @@ export class Company extends User {
   get page_analytics() {
     return this._page_analytics;
   }
-  async Make(data: Omit<ICompanyEntity, '_id'|'created_at'|'updated_at'>) {
-    if (this._email_validate(data.email)) {
-      this._email = data.email;
+  async Make({
+    email,
+    password,
+    name,
+    slogan,
+    overview,
+    graduate_stories,
+    website_link,
+    contact_email,
+    video,
+    banner_image,
+    logo_image,
+    taking_interns,
+    taking_graduates,
+    page_analytics
+  }: Omit<ICompanyEntity, '_id'|'created_at'|'updated_at'>) {
+    if (this._email_validate(email)) {
+      this._email = email;
     } else {
-      throw new Error(`Error, '${data.email}' is an invalid email address.`)
+      throw new Error(`Error, '${email}' is an invalid email address.`)
     }
 
     try {
-      this._password = await this._hash(data.password);
+      this._password = await this._hash(password);
     } catch {
-      throw new Error(`Error, failed to hash ${data.password}.`)
+      throw new Error(`Error, failed to hash ${password}.`)
     }
 
-    this._name = this._sanitizer(data.name);
-    this._slogan = this._sanitizer(data.slogan);
+    this._name = this._sanitizer(name);
+    this._slogan = this._sanitizer(slogan);
 
-    this._overview = this._sanitizer(data.overview);
-    this._graduate_stories = data.graduate_stories.map((story) => ({
+    this._overview = this._sanitizer(overview);
+    this._graduate_stories = graduate_stories.map((story) => ({
       name: this._sanitizer(story.name),
       role: this._sanitizer(story.role),
       summary: this._sanitizer(story.summary),
       story: this._sanitizer(story.story)
     }));
-    this._website_link = this._sanitizer(data.website_link);
-    this._contact_email = this._sanitizer(data.contact_email);
-    this._video = this._sanitizer(data.video);
-    this._banner_image = this._sanitizer(data.banner_image);
-    this._logo_image = this._sanitizer(data.logo_image);
-    this._taking_interns = data.taking_interns;
-    this._taking_graduates = data.taking_graduates;
-    this._banner_image = this._sanitizer(data.banner_image);
-    // data.page_analytics.forEach((analytic) => {
+    this._website_link = this._sanitizer(website_link);
+    this._contact_email = this._sanitizer(contact_email);
+    this._video = this._sanitizer(video);
+    this._banner_image = this._sanitizer(banner_image);
+    this._logo_image = this._sanitizer(logo_image);
+    this._taking_interns = taking_interns;
+    this._taking_graduates = taking_graduates;
+    // page_analytics.forEach((analytic) => {
     //   if (!this._id_check(analytic.id)) {
-    //     throw new Error(`Error, found invalid id ${analytic.id} when setting ${data.name} page analytics.`);
+    //     throw new Error(`Error, found invalid id ${analytic.id} when setting ${name} page analytics.`);
     //   }
     // })
-    this._page_analytics = data.page_analytics;
+    this._page_analytics = page_analytics;
+    return this;
   }
 }
 

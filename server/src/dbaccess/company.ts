@@ -1,6 +1,6 @@
-import {IMakeDb} from 'interfaces/db';
+import {IMakeCompanyDb} from 'interfaces/dbaccess/ICompanyDb';
 
-export const makeCompanyDb = (makeDb: IMakeDb) => {
+export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
   const findById = async ({id: _id}) => {
     const db = await makeDb();
     const res = await (db.collection('Companies').findOne({_id}));

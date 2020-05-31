@@ -1,6 +1,6 @@
-import {IMakeDb} from 'interfaces/db';
+import {IMakeInfoDb} from 'interfaces/dbaccess/IInfoDb';
 
-export const makeInfoDb = (makeDb: IMakeDb) => {
+export const makeInfoDb: IMakeInfoDb = (makeDb) => {
   const find = async () => {
     const db = await makeDb();
     const res = await (db.collection('Infos').findOne({}));

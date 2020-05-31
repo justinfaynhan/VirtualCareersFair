@@ -4,5 +4,5 @@ import {IAuthorizationTypes} from 'interfaces/IAuthorization';
 export interface IInviteEntity extends IBaseEntity {
   invite_code: string;
   privilege: string;
-  expiry: Date;
+  expiry: Date | string;
 }
