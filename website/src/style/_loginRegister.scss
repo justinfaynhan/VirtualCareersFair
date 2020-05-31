@@ -56,6 +56,12 @@ $loginRegister-button-glow-base: #C3D7F2;
     .inactive-btn {
         color: black;
     }
+    
+    // need to add this to make the toggle buttons more seperated and
+    // for the texts to be centered more
+    .right {
+        margin-left: 9px;
+    }
 
     #selected-toggle-btn {
         top: 0px;

@@ -62,8 +62,8 @@ function LoginRegisterPage() {
             <button
               className={
                 !pageState.isLogin
-                  ? "toggle-btn active-btn"
-                  : "toggle-btn inactive-btn"
+                  ? "toggle-btn active-btn right"
+                  : "toggle-btn inactive-btn right"
               }
               onClick={clickRegister}
             >
