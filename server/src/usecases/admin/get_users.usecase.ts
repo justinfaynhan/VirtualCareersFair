@@ -9,9 +9,9 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
     if (type !== 'ADMIN' && type !== 'STUDENT' && type !== 'COMPANY') {
       throw new Error(`Error, provided type arg '${type} is invalid, must be STUDENT, ADMIN or COMPANY`);
     }
-    const users = await userDb.findAll({types: ['ADMIN']});
+    const users = await userDb.findAll({types: [type]});
     if (type === 'ADMIN') {
-      const admins = <Array<IAdminEntity>>users;
+      const admins = (users as IAdminEntity[]);
       return {
         type,
         list: admins.map((data) => ({
@@ -20,7 +20,7 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
         }))
       }
     } else if (type === 'COMPANY') {
-      const companies = <Array<ICompanyEntity>>users;
+      const companies = (users as ICompanyEntity[]);
       return {
         type,
         list: companies.map((data) => ({
@@ -32,7 +32,7 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
         }))
       }
     } else {
-      const students = <Array<IStudentEntity>>users;
+      const students = (users as IStudentEntity[]);
       return {
         type,
         list: students.map((data) => ({
