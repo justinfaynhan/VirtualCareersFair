@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Card, Form, Input, Button } from "semantic-ui-react";
+import { Form, Input, Button } from "semantic-ui-react";
 
-function LoginCard(props) {
+function RegisterCard(props) {
   const [input, setInput] = useState({
+    inviteCode: "",
     email: "",
     password: "",
   });
@@ -17,15 +18,30 @@ function LoginCard(props) {
     setInput((prevState) => ({ ...prevState, password }));
   };
 
+  const handleInviteCodeUpdate = (event) => {
+    const inviteCode = event.target.value;
+    setInput((prevState) => ({ ...prevState, inviteCode }));
+  };
+
   return (
     <div className={props.className}>
       <Form>
         <Form.Field>
+          <label>Invite Code</label>
+          <Input
+            placeholder="Invite Code"
+            icon="barcode"
+            iconPosition="left"
+            value={input.password}
+            onChange={(event) => handleInviteCodeUpdate(event)}
+          />
+        </Form.Field>
+        <Form.Field>
           <label>Email</label>
           <Input
+            placeholder="Email"
             icon="mail"
             iconPosition="left"
-            placeholder="Email"
             value={input.email}
             onChange={(event) => handleEmailUpdate(event)}
           />
@@ -33,16 +49,16 @@ function LoginCard(props) {
         <Form.Field>
           <label>Password</label>
           <Input
+            placeholder="Password"
             icon="key"
             iconPosition="left"
-            placeholder="Password"
             value={input.password}
             onChange={(event) => handlePasswordUpdate(event)}
           />
         </Form.Field>
         <Form.Field>
           <div className="flex-container-centered">
-            <Button className="login-button">Login</Button>
+            <Button className="login-button">Register</Button>
           </div>
         </Form.Field>
       </Form>
@@ -50,4 +66,4 @@ function LoginCard(props) {
   );
 }
 
-export default LoginCard;
+export default RegisterCard;

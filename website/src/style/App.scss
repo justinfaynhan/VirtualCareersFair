@@ -3,6 +3,10 @@
 @import "helper";
 @import "variables";
 
+body, html {
+  min-height: 100% !important;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -10,5 +14,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(244, 246, 250);
+  overflow: auto !important;
+}
+
+/* scroll bar styling */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #3a7bd5;
+  background-image: linear-gradient(to top, #3a7bd5 0%, #00d2ff 100%);
+}
+
+#root {
+  height:100%
+}
+
+.App {
+  height: 100% !important;
 }

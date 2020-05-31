@@ -3,7 +3,7 @@ import "./style/App.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalState from "Context/GlobalState";
 import UserContext from "Context/userContext";
-import Login from "./pages/RegisterLogin/login";
+import LoginRegisterPage from "./pages/RegisterLogin/loginRegisterPage";
 
 function App() {
   const user = useContext(UserContext);
@@ -18,8 +18,7 @@ function App() {
           <Route></Route>
         </Switch> */}
         <div className="App">
-          <div>Hello</div>
-          <Login />
+          <LoginRegisterPage />
         </div>
       </Router>
     </GlobalState>
