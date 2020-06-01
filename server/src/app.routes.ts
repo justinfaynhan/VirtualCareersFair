@@ -87,8 +87,8 @@ export class CareersFair extends Controller {
 export class DashboardInfo extends Controller {
   /**Get the dashboard info interface associated with the requested type.
    * 
-   * The requested {type} parameter must be of either 'admin' | "student' | 
-   * 'company', which will be cross checked with the associated user_token user 
+   * The requested {type} parameter must be of either ADMIN | STUDENT | 
+   * COMPANY, which will be cross checked with the associated user_token user 
    * account privileges for authorization.
    * 
    * Only tokens authorized as admins can get the dashboard info of other 
@@ -198,8 +198,8 @@ export class Company extends Controller {
 export class Admin extends Controller {
   /**Get all users of specified type registered on the platform.
    * 
-   * The requested {type} parameter must be of either 'admin' | "student' | 
-   * 'company'.
+   * The requested {type} parameter must be of either ADMIN | STUDENT | 
+   * COMPANY.
    * 
    * Request user_token must be authorized as admin.
    */
@@ -214,8 +214,8 @@ export class Admin extends Controller {
   /**Generates a valid time-limited invite code which can be used to register 
    * an account on the platform with appropriate privileges. 
    * 
-   * The requested {type} parameter must be of either 'admin' | "student' | 
-   * 'company'.
+   * The requested {type} parameter must be of either ADMIN | STUDENT | 
+   * COMPANY.
    * 
    * Request user_token must be authorized as admin.
    */
@@ -229,8 +229,8 @@ export class Admin extends Controller {
   }
   /**Update the dashboard info interface for a particular account type. 
    * 
-   * The requested {type} parameter must be of either 'admin' | "student' | 
-   * 'company'.
+   * The requested {type} parameter must be of either ADMIN | STUDENT | 
+   * COMPANY.
    * 
    * Request user_token must be authorized as admin.
    */

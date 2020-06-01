@@ -24,12 +24,8 @@ const port = config.PORT;
 
 setupDb();
 
-try {
-	const swaggerDocument = require('./swagger.json');
-	app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-} catch (err) {
-	console.error('Unable to read swagger.json', err);
-}
+import swaggerDocument from './swagger.json';
+app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   return console.log(`server is listening on ${port}`);

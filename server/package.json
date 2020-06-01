@@ -6,7 +6,8 @@
   "scripts": {
     "generate": "tsoa routes && tsoa swagger",
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
-    "start:dev": "NODE_PATH=dist tsc-watch -p tsconfig.build.json --onSuccess \"node dist/app.js\"",
+    "lazy": "yarn generate && yarn start",
+    "start:dev": "NODE_PATH=dist tsc-watch --onSuccess \"node dist/app.js\"",
     "start:prod": "NODE_PATH=dist node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
@@ -33,6 +34,7 @@
     "swagger-ui-express": "^4.1.4",
     "ts-loader": "^7.0.4",
     "ts-node": "^8.10.1",
+    "tsc-watch": "^4.2.8",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^6.1.2",
     "tsoa": "^3.0.8",
