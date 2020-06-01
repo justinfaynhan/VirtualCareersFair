@@ -22,7 +22,7 @@ export const makeAdminDb: IMakeAdminDb = (makeDb) => {
   const insertOne = async ({...adminInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Admins').insertOne({...adminInfo});
-    return res;
+    return res.ops[0];
   };
   return Object.freeze({
     findAll,

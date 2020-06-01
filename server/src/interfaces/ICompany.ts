@@ -7,18 +7,34 @@ export type IGetCompanyAnalytics = (id: string) => Promise<ICompanyAnalytics>;
 export type IUpdateCompanyInfo = (id: string, info: any) => Promise<ICompanyInfo>;
 
 export interface ICompanyAnalytics {
-  data: Array<IAnalytics>
+  data: IAnalytics;
+}
+
+export type IAnalytics = IAnalyticsPre[] | IAnalyticsFull[];
+
+export interface IAnalyticsPre {
+  id: string;
+  created_at: Date | string;
+}
+
+export interface IAnalyticsFull {
+  id: string;
+  created_at: Date | string;
+  first_name: string;
+  last_name: string;
+  about: string;
+  skills: Array<string>;
+  uni: string;
+  degree: string;
+  resume_link?: string;
+  linkedin_link?: string;
+  github_link?: string;
+  portfolio_link?: string;
 }
 
 export interface ICompanyAnalyticsDownload {
   file: IAnalyticsFile
 }
-
-export interface IAnalytics {
-  id: string;
-  created_at: Date | string | number;
-}
-
 export type IAnalyticsFile = any;
 
 export interface IGraduateStory {

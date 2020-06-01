@@ -6,15 +6,15 @@ export const makeInviteDb: IMakeInviteDb = (makeDb) => {
     const res = await (db.collection('Invites').findOne({_id}));
     return res;    
   };
-  const findByCode = async ({code}) => {
+  const findByCode = async ({invite_code}) => {
     const db = await makeDb();
-    const res = await db.collection('Invites').findOne({code});
+    const res = await db.collection('Invites').findOne({invite_code});
     return res;    
   };
   const insertOne = async ({...invite}) => {
     const db = await makeDb();
     const res = await db.collection('Invites').insertOne({...invite});
-    return res;
+    return res.ops[0];
   };
   const removeOne = async ({_id}) => {
     const db = await makeDb()

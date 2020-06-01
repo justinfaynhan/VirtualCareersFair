@@ -10,7 +10,7 @@ export class Invite extends Base {
   private _code_gen: () => string;
   private _is_valid_date: (date: string | Date) => boolean;
 
-  private _code: string | null;
+  private _invite_code: string | null;
   private _privilege: IAuthorizationTypes | null;
   private _expiry: Date | string | null;
 
@@ -19,7 +19,7 @@ export class Invite extends Base {
     this._code_gen = args.code_gen;
     this._is_valid_date = args.is_valid_date;
 
-    this._code = null;
+    this._invite_code = null;
     this._privilege = null;
     this._expiry = null;
   }
@@ -30,7 +30,7 @@ export class Invite extends Base {
     return this._expiry;
   }
   Make({privilege, expiry}: Omit<IInviteEntity, 'invite_code'|'_id'|'created_at'|'updated_at'>) {
-    this._code = this._code_gen();
+    this._invite_code = this._code_gen();
     if (privilege === 'ADMIN' || privilege === 'STUDENT' || privilege === 'COMPANY') {
       this._privilege = privilege;
     } else {
@@ -47,7 +47,7 @@ export class Invite extends Base {
       id: this._id,
       created_at: this._created_at,
       updated_at: this._updated_at,
-      code: this._code,
+      invite_code: this._invite_code,
       privilege: this._privilege,
       expiry: this._expiry
     };

@@ -27,7 +27,7 @@ export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
   const insertOne = async ({...companyInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Companies').insertOne({...companyInfo});
-    return res;
+    return res.ops[0];
   };
   return Object.freeze({
     findById,

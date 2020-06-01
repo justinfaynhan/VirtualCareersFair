@@ -27,7 +27,7 @@ export const makeStudentDb: IMakeStudentDb = (makeDb) => {
   const insertOne = async ({...studentInfo}) => {
     const db = await makeDb();
     const res = await db.collection('Students').insertOne({...studentInfo});
-    return res;
+    return res.ops[0];
   };
   return Object.freeze({
     findById,

@@ -23,7 +23,6 @@ export const setupDb = async () => {
     const Company = db.model<ICompany>('Company', CompanySchema, 'Companies');
     const Info = db.model<IInfo>('Info', InfoSchema, 'Infos');
     const Invite = db.model<IInvite>('Invite', InviteSchema, 'Invites');
-
     console.log('Mongoose connection successfully created model schemas');
   });
 

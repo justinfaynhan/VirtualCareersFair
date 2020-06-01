@@ -1,5 +1,5 @@
 import mongoose, {Schema} from 'mongoose';
-import {User} from 'db/base.schema';
+import {User} from 'db/user';
 
 export const Student = {
   ...User,
