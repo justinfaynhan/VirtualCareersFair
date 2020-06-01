@@ -32,7 +32,7 @@ export class Info extends Base{
   get admin_instructions() {
     return this._admin_instructions;
   }
-  Make({
+  async Make({
     about_us, 
     student_instructions, 
     company_instructions, 
@@ -42,11 +42,8 @@ export class Info extends Base{
     this._student_instructions = this._sanitizer(student_instructions);
     this._company_instructions = this._sanitizer(company_instructions);
     this._admin_instructions = this._sanitizer(admin_instructions);
-    return this;
-  }
-  Fetch() {
     return {
-      id: this._id,
+      _id: this._id,
       created_at: this._created_at,
       updated_at: this._updated_at,
       about_us: this._about_us,

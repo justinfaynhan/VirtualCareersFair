@@ -13,5 +13,5 @@ export interface ICompanyEntity extends IUserEntity {
   logo_image: string;
   taking_interns: boolean;
   taking_graduates: boolean;
-  page_analytics: Array<IAnalytics>
+  page_analytics: IAnalytics;
 }

@@ -4,7 +4,7 @@ import config from 'config';
 
 export const hash = async (plaintext: string) => {
   try {
-    return await bcrypt.hash(plaintext, config.AUTH.salt_rounds);
+    return await (bcrypt.hash(plaintext, config.AUTH.salt_rounds));
   } catch {
     throw new Error(`Error, failed to hash plaintext ${plaintext}.`);
   }

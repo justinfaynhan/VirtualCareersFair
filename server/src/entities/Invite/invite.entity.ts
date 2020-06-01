@@ -29,7 +29,7 @@ export class Invite extends Base {
   get expiry() {
     return this._expiry;
   }
-  Make({privilege, expiry}: Omit<IInviteEntity, 'invite_code'|'_id'|'created_at'|'updated_at'>) {
+  async Make({privilege, expiry}: Omit<IInviteEntity, 'invite_code'|'_id'|'created_at'|'updated_at'>) {
     this._invite_code = this._code_gen();
     if (privilege === 'ADMIN' || privilege === 'STUDENT' || privilege === 'COMPANY') {
       this._privilege = privilege;
@@ -40,11 +40,8 @@ export class Invite extends Base {
       throw new Error(`Error, ${expiry} is not a valid date for Invite entity.`);
     }
     this._expiry = expiry;
-    return this;
-  }
-  Fetch() {
     return {
-      id: this._id,
+      _id: this._id,
       created_at: this._created_at,
       updated_at: this._updated_at,
       invite_code: this._invite_code,

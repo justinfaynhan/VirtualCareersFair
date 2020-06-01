@@ -7,7 +7,7 @@ export type IGetCompanyAnalytics = (id: string) => Promise<ICompanyAnalytics>;
 export type IUpdateCompanyInfo = (id: string, info: any) => Promise<ICompanyInfo>;
 
 export interface ICompanyAnalytics {
-  data: IAnalytics;
+  data: IAnalyticsPre[] | IAnalyticsFull[];
 }
 
 export type IAnalytics = IAnalyticsPre[] | IAnalyticsFull[];

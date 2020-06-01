@@ -6,30 +6,15 @@ export const makeUserDb: IMakeUserDb = (makeDb) => {
     const res = [];
     if (types.includes('ADMIN')) {
       const resAdmin = db.collection('Admins').find({});
-      res.concat(
-        (await resAdmin.toArray()).map(({_id: id, ...found}) => ({
-          id,
-          ...found
-        }))
-      )
+      res.push(...(await resAdmin.toArray()));
     }
     if (types.includes('COMPANY')) {
       const resCompany = db.collection('Companies').find({});
-      res.concat(
-        (await resCompany.toArray()).map(({_id: id, ...found}) => ({
-          id,
-          ...found
-        }))
-      )
+      res.push(...(await resCompany.toArray()));
     }
     if (types.includes('STUDENT')) {
       const resStudent = db.collection('Students').find({});
-      res.concat(
-        (await resStudent.toArray()).map(({_id: id, ...found}) => ({
-          id,
-          ...found
-        }))
-      )
+      res.push(...(await resStudent.toArray()));
     }
     return res;
   };

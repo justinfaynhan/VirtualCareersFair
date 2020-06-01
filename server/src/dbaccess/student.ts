@@ -9,8 +9,8 @@ export const makeStudentDb: IMakeStudentDb = (makeDb) => {
   const findAll = async () => {
     const db = await makeDb();
     const res = db.collection('Students').find({});
-    return (await res.toArray()).map(({_id: id, ...found}) => ({
-      id,
+    return (await res.toArray()).map(({_id, ...found}) => ({
+      _id,
       ...found
     }))
   };

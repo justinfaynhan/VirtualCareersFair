@@ -21,7 +21,7 @@ export class Company extends User {
   private _logo_image: string | null;
   private _taking_interns: boolean | null;
   private _taking_graduates: boolean | null;
-  private _page_analytics: Array<IAnalytics> | null;
+  private _page_analytics: IAnalytics | null;
 
   constructor(args: ICompanyConstructor) {
     super({hash: args.hash, email_validate: args.email_validate, id_gen: args.id_gen});
@@ -128,11 +128,8 @@ export class Company extends User {
     //   }
     // })
     this._page_analytics = page_analytics;
-    return this;
-  }
-  Fetch() {
     return {
-      id: this._id,
+      _id: this._id,
       created_at: this._created_at,
       updated_at: this._updated_at,
       email: this._email,

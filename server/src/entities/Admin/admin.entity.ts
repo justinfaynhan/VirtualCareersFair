@@ -23,11 +23,8 @@ export class Admin extends User {
     } catch {
       throw new Error(`Error, failed to hash ${password}.`)
     }
-    return this;
-  }
-  Fetch() {
     return {
-      id: this._id,
+      _id: this._id,
       created_at: this._created_at,
       updated_at: this._updated_at,
       email: this._email,

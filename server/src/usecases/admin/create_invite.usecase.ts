@@ -7,9 +7,10 @@ import {makeInvite} from 'entities/Invite';
 
 const makeCreateInvite = (inviteDb: IInviteDbAccess) => {
   const createInvite: IInviteUser = async (type: string, email: string) => {
+    // working
     var today = new Date();
     var tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000)).toISOString();
-    const invite = makeInvite.Make({privilege: type, expiry: tomorrow}).Fetch();
+    const invite = await makeInvite.Make({privilege: type, expiry: tomorrow});
     const res = (await inviteDb.insertOne(invite) as IInviteEntity);
     console.log(res);
     return {

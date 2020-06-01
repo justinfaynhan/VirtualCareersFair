@@ -9,10 +9,7 @@ export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
   const findAll = async () => {
     const db = await makeDb();
     const res = db.collection('Companies').find({});
-    return (await res.toArray()).map(({_id: id, ...found}) => ({
-      id,
-      ...found
-    }))
+    return (await res.toArray());
   };
   const findByEmail = async ({email}) => {
     const db = await makeDb();

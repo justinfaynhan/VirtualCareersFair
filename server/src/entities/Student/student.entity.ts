@@ -97,9 +97,24 @@ export class Student extends User {
     this._linkedin_link = this._sanitizer(linkedin_link);
     this._github_link = this._sanitizer(github_link);
     this._portfolio_link = this._sanitizer(portfolio_link);
-    return this;
+    return {
+      _id: this._id,
+      created_at: this._created_at,
+      updated_at: this._updated_at,
+      email: this._email,
+      password: this._password,
+      first_name: this._first_name,
+      last_name: this._last_name,
+      about: this._about,
+      skills: this._skills,
+      uni: this._uni,
+      degree: this._degree,
+      resume_link: this._resume_link,
+      linkedin_link: this._linkedin_link,
+      github_link: this._github_link,
+      portfolio_link: this._portfolio_link
+    };  
   }
-
 }
 
 export default Student;

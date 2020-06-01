@@ -6,6 +6,7 @@ import {IAdminEntity, ICompanyEntity, IStudentEntity} from 'interfaces/entities'
 
 const makeGetUsers = (userDb: IUserDbAccess) => {
   const getUsers: IGetUsersList = async (type: string) => {
+    // working
     if (type !== 'ADMIN' && type !== 'STUDENT' && type !== 'COMPANY') {
       throw new Error(`Error, provided type arg '${type} is invalid, must be STUDENT, ADMIN or COMPANY`);
     }

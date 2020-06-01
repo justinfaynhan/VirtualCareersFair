@@ -6,6 +6,12 @@ interface IServerConfig {
   };
   AUTH: {
     salt_rounds: string | number;
+  };
+  ADMIN: {
+    default: {
+      EMAIL: string;
+      PASSWORD: string;
+    }
   }
 }
 
@@ -17,11 +23,18 @@ const ServerConfig: IServerConfig = {
       dbName: 'vcf',
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
+      autoIndex: true
     }
   },
   AUTH: {
     salt_rounds: 10,
+  },
+  ADMIN: {
+    default: {
+      EMAIL: process.env.VCF_ADMIN_DEFAULT_EMAIL || 'justinnhan@hotmail.com',
+      PASSWORD: process.env.VCF_ADMIN_DEFAULT_PASSWORD || 'hihihihihihi123'
+    }
   }
 }
 
