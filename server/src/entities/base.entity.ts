@@ -17,6 +17,9 @@ export class Base {
   get id() {
     return this._id;
   }
+  set id(id: string) {
+    this._id = id;
+  }
   get created_at() {
     return this._created_at;
   }

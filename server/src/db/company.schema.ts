@@ -6,7 +6,7 @@ export const Company = {
   name: {type: String, index: true},
   slogan: {type: String},
   overview: {type: String},
-  graduate_stories: {type: String},
+  graduate_stories: {type: Array},
   website_link: {type: String},
   contact_email: {type: String},
   video: {type: String},

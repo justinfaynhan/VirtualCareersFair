@@ -26,15 +26,18 @@ export const setupDb = async () => {
     const Invite = db.model<IInvite>('Invite', InviteSchema, 'Invites');
     console.log('Mongoose connection successfully created model schemas');
 
-    const default_admin_account = await makeAdmin.Make({email: config.ADMIN.default.EMAIL, password: config.ADMIN.default.PASSWORD});
-    try {
-      const res = await Admin.create(default_admin_account);
-      console.log(res);
-      console.log('Created default admin account with email: ' + config.ADMIN.default.EMAIL);
-    } catch(e) {
-      console.log('Error creating default admin role: ' + e);
+    if (config.MODE === 'DEV') {
+      console.warn('Resetting database... change config.MODE to PROD to prevent this behaviour.');
+      seedDb(db, {Student, Admin, Company, Info, Invite});
+    } else {
+      const default_admin_account = await makeAdmin.Make({email: config.ADMIN.default.EMAIL, password: config.ADMIN.default.PASSWORD});
+      try {
+        const res = await Admin.create(default_admin_account);
+        console.log('Created default admin account with email: ' + config.ADMIN.default.EMAIL);
+      } catch(e) {
+        console.log('Error creating default admin role: ' + e);
+      }
     }
-    seedDb({Student, Admin, Company, Info, Invite});
   });
 
   db.on('error', (err) => {

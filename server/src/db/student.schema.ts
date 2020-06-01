@@ -6,7 +6,7 @@ export const Student = {
   first_name: {type: String},
   last_name: {type: String},
   about: {type: String},
-  skills: {type: String},
+  skills: {type: Array},
   uni: {type: String},
   degree: {type: String},
   resume_link: {type: String},

@@ -12,7 +12,8 @@ interface IServerConfig {
       EMAIL: string;
       PASSWORD: string;
     }
-  }
+  };
+  MODE: 'DEV' | 'PROD'
 }
 
 const ServerConfig: IServerConfig = {
@@ -35,7 +36,8 @@ const ServerConfig: IServerConfig = {
       EMAIL: process.env.VCF_ADMIN_DEFAULT_EMAIL || 'justinnhan@hotmail.com',
       PASSWORD: process.env.VCF_ADMIN_DEFAULT_PASSWORD || 'hihihihihihi123'
     }
-  }
+  },
+  MODE: process.env.VCF_MODE === 'PROD' ? 'PROD' : 'DEV'
 }
 
 export default ServerConfig;
