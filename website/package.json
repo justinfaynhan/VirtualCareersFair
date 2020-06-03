@@ -12,6 +12,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "axios": "^0.19.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -19,7 +20,8 @@
     "react-scripts": "3.4.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "universal-cookie": "^4.0.3"
   },
   "scripts": {
     "start": "PORT=9000 react-scripts start",
