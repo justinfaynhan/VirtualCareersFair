@@ -93,6 +93,7 @@ export class Company extends User {
     taking_graduates,
     page_analytics
   }: Omit<ICompanyEntity, '_id'|'created_at'|'updated_at'>) {
+    logo_image;
     if (this._email_validate(email)) {
       this._email = email;
     } else {
@@ -105,29 +106,25 @@ export class Company extends User {
       throw new Error(`Error, failed to hash ${password}.`)
     }
 
-    this._name = this._sanitizer(name);
-    this._slogan = this._sanitizer(slogan);
+    this._name = name ? this._sanitizer(name) : null;
+    this._slogan = slogan ? this._sanitizer(slogan) : null;
 
-    this._overview = this._sanitizer(overview);
-    this._graduate_stories = graduate_stories.map((story) => ({
+    this._overview = overview ? this._sanitizer(overview) : null;
+    this._graduate_stories = graduate_stories ? graduate_stories.map((story) => ({
       name: this._sanitizer(story.name),
       role: this._sanitizer(story.role),
       summary: this._sanitizer(story.summary),
       story: this._sanitizer(story.story)
-    }));
-    this._website_link = this._sanitizer(website_link);
-    this._contact_email = this._sanitizer(contact_email);
-    this._video = this._sanitizer(video);
-    this._banner_image = this._sanitizer(banner_image);
-    this._logo_image = this._sanitizer(logo_image);
-    this._taking_interns = taking_interns;
-    this._taking_graduates = taking_graduates;
-    // page_analytics.forEach((analytic) => {
-    //   if (!this._id_check(analytic.id)) {
-    //     throw new Error(`Error, found invalid id ${analytic.id} when setting ${name} page analytics.`);
-    //   }
-    // })
-    this._page_analytics = page_analytics;
+    })) : [];
+    this._website_link = website_link ? this._sanitizer(website_link) : null;
+    this._contact_email = contact_email ? this._sanitizer(contact_email) : null;
+    this._video = video ? this._sanitizer(video) : null;
+    this._banner_image = banner_image ? this._sanitizer(banner_image) : null;
+    this._logo_image = logo_image ? this._sanitizer(logo_image) : null
+    this._taking_interns = taking_interns ? taking_interns : null;
+    this._taking_graduates = taking_graduates ? taking_graduates : null;
+    this._page_analytics = page_analytics ? page_analytics : null;
+    
     return {
       _id: this._id,
       created_at: this._created_at,

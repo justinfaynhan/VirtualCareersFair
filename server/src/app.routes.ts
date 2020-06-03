@@ -32,7 +32,7 @@ export class Register extends Controller {
    */
   @Post()
   public async post(
-    @Query() username: string,
+    @Query() email: string,
     @Query() password: string,
     @Query() invite_code: string,
     @Request() request: express.Request
@@ -48,7 +48,7 @@ export class Login extends Controller {
    */
   @Post()
   public async post(
-    @Query() username: string,
+    @Query() email: string,
     @Query() password: string,
     @Request() request: express.Request
   ): Promise<any> {

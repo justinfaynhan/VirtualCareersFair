@@ -6,6 +6,9 @@ interface IServerConfig {
   };
   AUTH: {
     salt_rounds: string | number;
+    JWT: {
+      SECRET: string;
+    }
   };
   ADMIN: {
     default: {
@@ -30,6 +33,9 @@ const ServerConfig: IServerConfig = {
   },
   AUTH: {
     salt_rounds: 10,
+    JWT: {
+      SECRET: process.env.VCF_AUTH_JWT_SECRET || 'hellohihithisisaV3ryImportantS3CreTh@h@h@_'
+    }
   },
   ADMIN: {
     default: {

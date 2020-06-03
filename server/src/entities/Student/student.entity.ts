@@ -87,16 +87,16 @@ export class Student extends User {
     } catch {
       throw new Error(`Error, failed to hash ${password}.`)
     }
-    this._first_name = this._sanitizer(first_name);
-    this._last_name = this._sanitizer(last_name);
-    this._about = this._sanitizer(about);
-    this._skills = skills.map((skill) => this._sanitizer(skill));
-    this._uni = this._sanitizer(uni);
-    this._degree = this._sanitizer(degree);
-    this._resume_link = this._sanitizer(resume_link);
-    this._linkedin_link = this._sanitizer(linkedin_link);
-    this._github_link = this._sanitizer(github_link);
-    this._portfolio_link = this._sanitizer(portfolio_link);
+    this._first_name = first_name ? this._sanitizer(first_name) : null;
+    this._last_name = last_name ? this._sanitizer(last_name) : null;
+    this._about = about ? this._sanitizer(about) : null;
+    this._skills = skills ? skills.map((skill) => this._sanitizer(skill)) : [];
+    this._uni = uni ? this._sanitizer(uni) : null;
+    this._degree = degree ? this._sanitizer(degree) : null;
+    this._resume_link = resume_link ? this._sanitizer(resume_link) : null;
+    this._linkedin_link = linkedin_link ? this._sanitizer(linkedin_link) : null;
+    this._github_link = github_link ? this._sanitizer(github_link) : null;
+    this._portfolio_link = portfolio_link ? this._sanitizer(portfolio_link) : null;
     return {
       _id: this._id,
       created_at: this._created_at,

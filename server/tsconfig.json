@@ -8,7 +8,9 @@
     "outDir": "dist",
     "baseUrl": "src",
     "experimentalDecorators": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "allowAn"
   },
   "lib": ["es2015"],
   "include": ["src"]

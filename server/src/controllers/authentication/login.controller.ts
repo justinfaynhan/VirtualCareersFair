@@ -7,9 +7,9 @@ const makeRegister = (login: ILogin) => {
       'Content-Type': 'application/json'
     }
     try {
-      const username: string = httpRequest.query.username;
+      const email: string = httpRequest.query.email;
       const password: string = httpRequest.query.password;
-      const token = await login(username, password);
+      const token = await login(email, password);
       return {
         headers,
         statusCode: 200,
