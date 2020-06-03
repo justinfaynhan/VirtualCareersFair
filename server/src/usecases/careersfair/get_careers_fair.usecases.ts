@@ -6,6 +6,7 @@ import {ICompanyEntity} from 'interfaces/entities'
 
 const makeGetCareersFair = (companyDb: ICompanyDbAccess) => {
   const getCareersFair: IGetCareersFairLanding = async () => {
+    // working
     const all = ((await companyDb.findAll()) as ICompanyEntity[]);
     return {
       companies: all.map((company) => ({
