@@ -4,9 +4,9 @@ export interface IBaseConstructor {
 export class Base {
   protected _id_gen: () => string;
 
-  protected _id: string | null;
-  protected _created_at: Date | string | number | null;
-  protected _updated_at: Date | string | number | null;
+  protected _id: string;
+  protected _created_at: Date | string | number;
+  protected _updated_at: Date | string | number;
   constructor(args: IBaseConstructor) {
     this._id_gen = args.id_gen;
 

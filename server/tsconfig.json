@@ -9,8 +9,7 @@
     "baseUrl": "src",
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "strictNullChecks": true,
-    "allowAn"
+    "strictNullChecks": true
   },
   "lib": ["es2015"],
   "include": ["src"]
