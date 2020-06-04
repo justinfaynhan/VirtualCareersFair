@@ -15,6 +15,6 @@ export default class Routes {
     }
 
     private makeRoutes(routeName: string) {
-        return `${process.env.API_BASE_URL}/${routeName}`;
+        return `${process.env.REACT_APP_API_URL}${routeName}`;
     }
 }
