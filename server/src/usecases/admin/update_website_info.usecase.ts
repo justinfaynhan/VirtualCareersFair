@@ -22,7 +22,7 @@ const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
       delete new_info.created_at;
     }
     const _id = get_info ? get_info._id : new_info._id;
-    const updated_info = (await websiteInfoDb.upsertOne({_id, ...new_info}) as IInfoEntity);
+    const updated_info = (await websiteInfoDb.upsertOne({...new_info, _id}) as IInfoEntity);
 
     let instructions;
     if (type === 'ADMIN') instructions = updated_info.admin_instructions;

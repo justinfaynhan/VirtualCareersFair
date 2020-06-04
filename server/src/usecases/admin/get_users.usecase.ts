@@ -26,10 +26,10 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
         type,
         list: companies.map((data) => ({
           id: data._id,
-          name: data.name,
+          name: data.name ? data.name : undefined,
           email: data.email,
           filled_info: Object.entries(data).reduce((acc, cur) => cur[1] && cur[0] !== '_id' ? acc + 1 : acc, 0) / (Object.keys(data).length - 1), // get percentage progress of how much info filled, lol
-          contact_info: data.contact_email
+          contact_info: data.contact_email ? data.contact_email : undefined
         }))
       }
     } else {
@@ -38,11 +38,11 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
         type,
         list: students.map((data) => ({
           id: data._id,
-          first_name: data.first_name,
-          last_name: data.last_name,
+          first_name: data.first_name ? data.first_name : undefined,
+          last_name: data.last_name ? data.last_name : undefined,
           completed_profile: Object.entries(data).reduce((acc, cur) => cur[1] && cur[0] !== '_id' ? acc + 1 : acc, 0) / (Object.keys(data).length - 1),
-          uni: data.uni,
-          degree: data.degree,
+          uni: data.uni ? data.uni : undefined,
+          degree: data.degree ? data.degree : undefined,
         }))
       }
     }

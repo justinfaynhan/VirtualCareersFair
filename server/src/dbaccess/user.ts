@@ -3,18 +3,18 @@ import {IMakeUserDb} from 'interfaces/dbaccess/IUserDb';
 export const makeUserDb: IMakeUserDb = (makeDb) => {
   const findAll = async ({types}) => {
     const db = await makeDb();
-    const res = [];
+    let res = [];
     if (types.includes('ADMIN')) {
       const resAdmin = db.collection('Admins').find({});
-      res.push(...(await resAdmin.toArray()));
+      res = res.concat((await resAdmin.toArray() as any));
     }
     if (types.includes('COMPANY')) {
       const resCompany = db.collection('Companies').find({});
-      res.push(...(await resCompany.toArray()));
+      res = res.concat((await resCompany.toArray() as any));
     }
     if (types.includes('STUDENT')) {
       const resStudent = db.collection('Students').find({});
-      res.push(...(await resStudent.toArray()));
+      res = res.concat((await resStudent.toArray() as any));
     }
     return res;
   };

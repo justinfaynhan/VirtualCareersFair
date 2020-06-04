@@ -11,11 +11,11 @@ const makeGetCareersFair = (companyDb: ICompanyDbAccess) => {
     return {
       companies: all.map((company) => ({
         id: company._id,
-        name: company.name,
-        logo: company.logo_image,
-        banner_image: company.banner_image,
-        taking_interns: company.taking_interns,
-        taking_graduates: company.taking_graduates
+        name: company.name ? company.name : undefined,
+        logo: company.logo_image ? company.logo_image : undefined,
+        banner_image: company.banner_image ? company.banner_image : undefined,
+        taking_interns: company.taking_interns ? company.taking_interns : undefined,
+        taking_graduates: company.taking_graduates ? company.taking_graduates : undefined
       }))
     }
     // return {
