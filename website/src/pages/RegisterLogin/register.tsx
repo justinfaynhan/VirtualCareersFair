@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Form, Input, Button } from "semantic-ui-react";
 import Routes from "../../Routes/AppRoutes";
 import CredentialService from "../../Services/CredentialService";
-import { Redirect } from "react-router-dom";
+import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import {
   UserSignUpCredentials,
   UserAuthDetail,
@@ -60,7 +60,11 @@ function RegisterCard(props) {
   };
 
   if (redirect) {
-    return <Redirect to={Routes.home} />;
+    return (
+      <Router>
+        <Redirect to={Routes.home} />
+      </Router>
+    );
   }
 
   return (
