@@ -14,7 +14,7 @@ export default class CredentialService {
     public async Register(model: UserSignUpCredentials): Promise<UserAuthDetail> {
         try {
             const routeFetcher = new Routes();
-            const response = await axios.get(routeFetcher.getRegisterRoute());
+            const response = await axios.post(routeFetcher.getRegisterRoute(), model);
             const authDetail =  new UserAuthDetail(model.username, response['body']['user_token']);
             this.SaveToCookies(authDetail);
             return authDetail;
@@ -30,7 +30,7 @@ export default class CredentialService {
     public async Login(model: UserLoginCredentials): Promise<UserAuthDetail> {
         try {
             const routeFetcher = new Routes();
-            const response = await axios.get(routeFetcher.getLoginRoute());
+            const response = await axios.post(routeFetcher.getLoginRoute(), model);
             const authDetail =  new UserAuthDetail(model.username, response['body']['user_token']);
             this.SaveToCookies(authDetail);
             return authDetail;
