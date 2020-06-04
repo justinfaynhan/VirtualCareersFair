@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card } from "semantic-ui-react";
 import Login from "./login";
 import Register from "./register";
+import Loader from "../../components/Helpers/LoaderComponent";
 
 function LoginRegisterPage() {
   const [pageState, setPageState] = useState({
@@ -42,6 +43,7 @@ function LoginRegisterPage() {
 
   return (
     <div id="LoginRegisterPage" className="flex-container-centered">
+      <Loader></Loader>
       <Card className="formContainer">
         <Card.Content className="contentContainer">
           <div className="buttonContainer">
