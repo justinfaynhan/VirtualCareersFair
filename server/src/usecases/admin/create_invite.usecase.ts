@@ -11,8 +11,7 @@ const makeCreateInvite = (inviteDb: IInviteDbAccess) => {
     var today = new Date();
     var tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000)).toISOString();
     const invite = await makeInvite.Make({privilege: type, expiry: tomorrow});
-    const res = (await inviteDb.insertOne(invite) as IInviteEntity);
-    console.log(res);
+    const res = await inviteDb.insertOne(invite);
     return {
       invite_code: res.invite_code
     }

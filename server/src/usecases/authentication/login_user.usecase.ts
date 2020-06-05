@@ -17,9 +17,9 @@ const makeLoginUser = ({adminDb, companyDb, studentDb}: IDbs) => {
   const loginUser: ILogin = async (email: string, password: string) => {
     // working
     let authorization: IAuthorizationTypes;
-    let admin_res = (await adminDb.findByEmail({email}) as IAdminEntity);
-    let company_res = (await companyDb.findByEmail({email}) as ICompanyEntity);
-    let student_res = (await studentDb.findByEmail({email}) as IStudentEntity);
+    let admin_res = await adminDb.findByEmail({email});
+    let company_res = await companyDb.findByEmail({email});
+    let student_res = await studentDb.findByEmail({email});
 
     if (admin_res) {
       if (!(await check(password, admin_res.password))) {

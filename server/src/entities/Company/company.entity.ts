@@ -123,7 +123,7 @@ export class Company extends User {
     this._logo_image = logo_image ? this._sanitizer(logo_image) : null
     this._taking_interns = taking_interns ? taking_interns : null;
     this._taking_graduates = taking_graduates ? taking_graduates : null;
-    this._page_analytics = page_analytics ? page_analytics : null;
+    this._page_analytics = page_analytics ? page_analytics : [];
     
     return {
       _id: this._id,

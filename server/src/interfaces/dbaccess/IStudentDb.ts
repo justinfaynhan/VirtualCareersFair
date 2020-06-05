@@ -2,11 +2,11 @@ import {IMakeDb} from 'interfaces/dbaccess';
 import {IStudentEntity} from 'interfaces/entities';
 
 export interface IStudentDbAccess {
-  findAll: () => Promise<Array<{[key: string]: any}>>;
-  findById: ({_id}: {_id: string}) => Promise<{[key: string]: any} | null>;
-  findByEmail: ({email}: {email: string}) => Promise<{[key: string]: any} | null>;
-  updateOne: ({}: IStudentEntity | {[key: string]: any}) => Promise<{[key: string]: any} | null>;
-  insertOne: ({}: IStudentEntity | {[key: string]: any}) => Promise<{[key: string]: any}>;
+  findAll: () => Promise<Array<IStudentEntity>>;
+  findById: ({_id}: {_id: string}) => Promise<IStudentEntity | null>;
+  findByEmail: ({email}: {email: string}) => Promise<IStudentEntity | null>;
+  updateOne: ({}: IStudentEntity) => Promise<IStudentEntity | null>;
+  insertOne: ({}: IStudentEntity) => Promise<IStudentEntity>;
 }
 
 export type IMakeStudentDb = (makeDb: IMakeDb) => IStudentDbAccess;

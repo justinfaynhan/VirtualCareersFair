@@ -11,7 +11,7 @@ const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
     if (type !== 'ADMIN' && type !== 'STUDENT' && type !== 'COMPANY') {
       throw new Error(`Error, provided type arg '${type} is invalid, must be STUDENT, ADMIN or COMPANY`);
     }
-    const get_info = (await websiteInfoDb.findOne() as IInfoEntity | null);
+    const get_info = await websiteInfoDb.findOne();
     const new_info = await makeInfo.Make({
       about_us: dashboard.about_us,
       admin_instructions: type === 'ADMIN' ? dashboard.instructions : get_info ? get_info.admin_instructions : '',
@@ -22,7 +22,7 @@ const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
       delete new_info.created_at;
     }
     const _id = get_info ? get_info._id : new_info._id;
-    const updated_info = (await websiteInfoDb.upsertOne({...new_info, _id}) as IInfoEntity);
+    const updated_info = await websiteInfoDb.upsertOne({...new_info, _id});
 
     let instructions;
     if (type === 'ADMIN') instructions = updated_info.admin_instructions;

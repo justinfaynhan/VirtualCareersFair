@@ -3,9 +3,9 @@ import {IAdminEntity} from 'interfaces/entities';
 
 export interface IAdminDbAccess {
   findAll: () => Promise<Array<{}>>;
-  findById: ({_id}: {_id: string}) => Promise<{[key: string]: any} | null>;
-  findByEmail: ({email}: {email: string}) => Promise<{[key: string]: any} | null>;
-  insertOne: ({}: IAdminEntity | {[key: string]: any}) => Promise<{[key: string]: any}>;
+  findById: ({_id}: {_id: string}) => Promise<IAdminEntity | null>;
+  findByEmail: ({email}: {email: string}) => Promise<IAdminEntity | null>;
+  insertOne: ({}: IAdminEntity) => Promise<IAdminEntity>;
 }
 
 export type IMakeAdminDb = (makeDb: IMakeDb) => IAdminDbAccess;

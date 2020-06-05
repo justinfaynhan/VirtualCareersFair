@@ -3,10 +3,10 @@ import {ICompanyEntity} from 'interfaces/entities';
 
 export interface ICompanyDbAccess {
   findAll: () => Promise<Array<any>>;
-  findById: ({_id}: {_id: string}) => Promise<{[key: string]: any} | null>;
-  findByEmail: ({email}: {email: string}) => Promise<{[key: string]: any} | null>;
-  updateOne: ({}: ICompanyEntity | {[key: string]: any}) => Promise<{[key: string]: any} | null>;
-  insertOne: ({}: ICompanyEntity | {[key: string]: any}) => Promise<{[key: string]: any}>;
+  findById: ({_id}: {_id: string}) => Promise<ICompanyEntity | null>;
+  findByEmail: ({email}: {email: string}) => Promise<ICompanyEntity | null>;
+  updateOne: ({}: ICompanyEntity) => Promise<ICompanyEntity | null>;
+  insertOne: ({}: ICompanyEntity) => Promise<ICompanyEntity>;
 }
 
 export type IMakeCompanyDb = (makeDb: IMakeDb) => ICompanyDbAccess;
