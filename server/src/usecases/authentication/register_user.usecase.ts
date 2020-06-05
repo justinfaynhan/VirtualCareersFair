@@ -36,10 +36,6 @@ const makeRegisterUser = ({adminDb, companyDb, studentDb}: IDbs, inviteCodeDb: I
       } else if (res.privilege === 'STUDENT') {
         const user = await makeStudent.Make({email, password});
         await studentDb.insertOne(user);
-        console.log(password);
-        console.log(await hash(password));
-        console.log(user.password);
-        console.log(await hash('a'));
       } else {
         throw new Error(`Error, invalid privilege ${res.privilege} type for user ${email}.`);
       }

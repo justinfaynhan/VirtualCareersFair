@@ -1,4 +1,5 @@
 import {IMakeUserDb} from 'interfaces/dbaccess/IUserDb';
+import {IAdminEntity, IStudentEntity, ICompanyEntity} from 'interfaces/entities';
 
 export const makeUserDb: IMakeUserDb = (makeDb) => {
   const findAll = async ({types}) => {
@@ -16,7 +17,7 @@ export const makeUserDb: IMakeUserDb = (makeDb) => {
       const resStudent = db.collection('Students').find({});
       res = res.concat((await resStudent.toArray() as any));
     }
-    return res;
+    return res as IAdminEntity[] | IStudentEntity[] | ICompanyEntity[];
   };
   const findById = async ({_id}) => {
     const db = await makeDb();
@@ -24,7 +25,7 @@ export const makeUserDb: IMakeUserDb = (makeDb) => {
     const resStudent = await (db.collection('Admins').findOne({_id}));
     const resCompany = await (db.collection('Admins').findOne({_id}));
 
-    return resAdmin || resStudent || resCompany;    
+    return (resAdmin || resStudent || resCompany) as IAdminEntity | ICompanyEntity | IStudentEntity | null;    
   };
   const findByEmail = async ({email}) => {
     const db = await makeDb();
@@ -32,7 +33,7 @@ export const makeUserDb: IMakeUserDb = (makeDb) => {
     const resStudent = await (db.collection('Admins').findOne({email}));
     const resCompany = await (db.collection('Admins').findOne({email}));
 
-    return resAdmin || resStudent || resCompany;    
+    return (resAdmin || resStudent || resCompany) as IAdminEntity | ICompanyEntity | IStudentEntity | null;    
   }
   return Object.freeze({
     findAll,
