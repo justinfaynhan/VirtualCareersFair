@@ -20,12 +20,12 @@ export interface IAnalyticsPre {
 export interface IAnalyticsFull {
   id: string;
   created_at: Date | string;
-  first_name: string;
-  last_name: string;
-  about: string;
-  skills: Array<string>;
-  uni: string;
-  degree: string;
+  first_name?: string;
+  last_name?: string;
+  about?: string;
+  skills?: Array<string>;
+  uni?: string;
+  degree?: string;
   resume_link?: string;
   linkedin_link?: string;
   github_link?: string;
@@ -45,11 +45,11 @@ export interface IGraduateStory {
 }
 export interface ICompanyInfo {
   id: string;
-  name: string;
-  slogan: string;
-  overview: any;
+  name?: string;
+  slogan?: string;
+  overview?: any;
   graduate_stories: Array<IGraduateStory>;
-  videos: any;
-  website: string;
-  contact_info: any;
+  videos?: any;
+  website?: string;
+  contact_info?: any;
 }
