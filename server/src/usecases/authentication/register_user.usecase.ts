@@ -19,6 +19,8 @@ const makeRegisterUser = ({adminDb, companyDb, studentDb}: IDbs, inviteCodeDb: I
     const res = await inviteCodeDb.findByCode({invite_code});
     if (res === null) {
       throw new Error("Error, invalid invite code provided.");
+    } else if (!res._id) {
+      throw new Error("Error retrieving user id.");
     } else {
       try {
         inviteCodeDb.removeOne({_id: res._id});

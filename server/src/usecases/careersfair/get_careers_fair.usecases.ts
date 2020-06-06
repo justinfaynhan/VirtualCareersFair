@@ -10,7 +10,7 @@ const makeGetCareersFair = (companyDb: ICompanyDbAccess) => {
     const all = (await companyDb.findAll());
     return {
       companies: all.map((company) => ({
-        id: company._id,
+        id: company._id ? company._id : '',
         name: company.name ? company.name : undefined,
         logo: company.logo_image ? company.logo_image : undefined,
         banner_image: company.banner_image ? company.banner_image : undefined,

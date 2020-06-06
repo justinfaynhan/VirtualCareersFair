@@ -19,7 +19,7 @@ export const makeStudentDb: IMakeStudentDb = (makeDb) => {
   }
   const updateOne = async ({_id, ...studentInfo}) => {
     const db = await makeDb();
-    const res = await db.collection('Students').findOneAndUpdate({_id}, studentInfo, {returnOriginal: false});
+    const res = await db.collection('Students').findOneAndUpdate({_id}, {$set: studentInfo}, {returnOriginal: false});
     return res as IStudentEntity | null;
   };
   const insertOne = async ({...studentInfo}) => {

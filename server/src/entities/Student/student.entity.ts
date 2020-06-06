@@ -1,5 +1,5 @@
 import User, {IUserConstructor} from 'entities/User/user.entity';
-import {IStudentEntity} from 'interfaces/entities/IStudent.entity';
+import {IStudentEntity, IStudentEntityMakeArgs} from 'interfaces/entities/IStudent.entity';
 
 export interface IStudentConstructor extends IUserConstructor {
   sanitizer: (text: string) => string;
@@ -76,21 +76,31 @@ export class Student extends User {
     linkedin_link, 
     github_link, 
     portfolio_link
-  }: Omit<IStudentEntity, '_id'|'created_at'|'updated_at'>) {
-    if (this._email_validate(email)) {
-      this._email = email;
+  }: IStudentEntityMakeArgs) {
+    if (email) {
+      if (this._email_validate(email)) {
+        this._email = email;
+      } else {
+        throw new Error(`Error, '${email}' is an invalid email address.`)
+      }
     } else {
-      throw new Error(`Error, '${email}' is an invalid email address.`)
+      this._email = null;
     }
-    try {
-      this._password = await this._hash(password);
-    } catch {
-      throw new Error(`Error, failed to hash ${password}.`)
+
+    if (password) {
+      try {
+        this._password = await this._hash(password);
+      } catch {
+        throw new Error(`Error, failed to hash ${password}.`)
+      }
+    } else {
+      this._password = null;
     }
+
     this._first_name = first_name ? this._sanitizer(first_name) : null;
     this._last_name = last_name ? this._sanitizer(last_name) : null;
     this._about = about ? this._sanitizer(about) : null;
-    this._skills = skills ? skills.map((skill) => this._sanitizer(skill)) : [];
+    this._skills = skills ? skills.map((skill) => this._sanitizer(skill)) : null;
     this._uni = uni ? this._sanitizer(uni) : null;
     this._degree = degree ? this._sanitizer(degree) : null;
     this._resume_link = resume_link ? this._sanitizer(resume_link) : null;
@@ -113,7 +123,7 @@ export class Student extends User {
       linkedin_link: this._linkedin_link,
       github_link: this._github_link,
       portfolio_link: this._portfolio_link
-    };  
+    } as IStudentEntity;  
   }
 }
 

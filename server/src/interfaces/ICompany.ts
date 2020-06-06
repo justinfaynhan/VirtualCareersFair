@@ -1,6 +1,6 @@
 export type IGetCompanyInfo = (id: string) => Promise<ICompanyInfo>;
 
-export type IGetCompanyAnalyticsDownload = (id: string) => Promise<IAnalyticsFile>;
+export type IGetCompanyAnalyticsDownload = (id: string) => Promise<ICompanyAnalyticsDownload>;
 
 export type IGetCompanyAnalytics = (id: string) => Promise<ICompanyAnalytics>;
 
@@ -35,7 +35,7 @@ export interface IAnalyticsFull {
 export interface ICompanyAnalyticsDownload {
   file: IAnalyticsFile
 }
-export type IAnalyticsFile = any;
+export type IAnalyticsFile = string;
 
 export interface IGraduateStory {
   name: string;
@@ -44,6 +44,7 @@ export interface IGraduateStory {
   story: string;
 }
 export interface ICompanyInfo {
+  email: string;
   id: string;
   name?: string;
   slogan?: string;

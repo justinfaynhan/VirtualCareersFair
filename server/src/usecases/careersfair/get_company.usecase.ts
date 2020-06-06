@@ -11,6 +11,7 @@ const makeGetCompany = (companyDb: ICompanyDbAccess) => {
     }
     return {
       id,
+      email: company.email ? company.email : '',
       name: company.name ? company.name : undefined,
       slogan: company.slogan ? company.slogan : undefined,
       overview: company.overview ? company.overview : undefined,

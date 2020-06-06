@@ -1,6 +1,6 @@
 import {IAuthorizationTypes} from 'interfaces/IAuthorization';
 import Base, {IBaseConstructor} from 'entities/base.entity';
-import {IInviteEntity} from 'interfaces/entities/IInvite.entity'
+import {IInviteEntity, IInviteEntityMakeArgs} from 'interfaces/entities/IInvite.entity'
 
 export interface IInviteConstructor extends IBaseConstructor {
   code_gen: () => string;
@@ -29,17 +29,17 @@ export class Invite extends Base {
   get expiry() {
     return this._expiry;
   }
-  async Make({privilege, expiry}: Omit<IInviteEntity, 'invite_code'|'_id'|'created_at'|'updated_at'>) {
+  async Make({privilege, expiry}: IInviteEntityMakeArgs) {
     this._invite_code = this._code_gen();
     if (privilege === 'ADMIN' || privilege === 'STUDENT' || privilege === 'COMPANY') {
       this._privilege = privilege;
     } else {
       throw new Error(`Error, could not assign invalid privilege type for invite code: ${privilege}.`);
     }
-    if (!this._is_valid_date(expiry)) {
+    if (expiry && !this._is_valid_date(expiry)) {
       throw new Error(`Error, ${expiry} is not a valid date for Invite entity.`);
     }
-    this._expiry = expiry;
+    this._expiry = expiry ? expiry : null;
     return {
       _id: this._id,
       created_at: this._created_at,
@@ -47,7 +47,7 @@ export class Invite extends Base {
       invite_code: this._invite_code,
       privilege: this._privilege,
       expiry: this._expiry
-    };
+    } as IInviteEntity;
   }
 }
 

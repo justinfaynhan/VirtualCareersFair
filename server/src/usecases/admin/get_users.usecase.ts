@@ -16,18 +16,18 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
       return {
         type,
         list: admins.map((data) => ({
-          id: data._id,
-          email: data.email
+          id: data._id ? data._id : '',
+          email: data.email ? data.email : '',
         }))
-      }
+      };
     } else if (type === 'COMPANY') {
       const companies = (users as ICompanyEntity[]);
       return {
         type,
         list: companies.map((data) => ({
-          id: data._id,
+          id: data._id ? data._id : '',
           name: data.name ? data.name : undefined,
-          email: data.email,
+          email: data.email ? data.email : '',
           filled_info: Object.entries(data).reduce((acc, cur) => cur[1] && cur[0] !== '_id' ? acc + 1 : acc, 0) / (Object.keys(data).length - 1), // get percentage progress of how much info filled, lol
           contact_info: data.contact_email ? data.contact_email : undefined
         }))
@@ -37,7 +37,8 @@ const makeGetUsers = (userDb: IUserDbAccess) => {
       return {
         type,
         list: students.map((data) => ({
-          id: data._id,
+          id: data._id ? data._id : '',
+          email: data.email ? data.email : '',
           first_name: data.first_name ? data.first_name : undefined,
           last_name: data.last_name ? data.last_name : undefined,
           completed_profile: Object.entries(data).reduce((acc, cur) => cur[1] && cur[0] !== '_id' ? acc + 1 : acc, 0) / (Object.keys(data).length - 1),

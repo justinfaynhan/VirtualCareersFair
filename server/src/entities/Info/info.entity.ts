@@ -1,5 +1,5 @@
 import Base, {IBaseConstructor} from 'entities/base.entity';
-import {IInfoEntity} from 'interfaces/entities/IInfo.entity';
+import {IInfoEntity, IInfoEntityMakeArgs} from 'interfaces/entities/IInfo.entity';
 
 export interface IInfoConstructor extends IBaseConstructor {
   sanitizer: (text: string) => string;
@@ -37,11 +37,11 @@ export class Info extends Base{
     student_instructions, 
     company_instructions, 
     admin_instructions
-  }: Omit<IInfoEntity, '_id'|'created_at'|'updated_at'>) {
-    this._about_us = this._sanitizer(about_us);
-    this._student_instructions = this._sanitizer(student_instructions);
-    this._company_instructions = this._sanitizer(company_instructions);
-    this._admin_instructions = this._sanitizer(admin_instructions);
+  }: IInfoEntityMakeArgs) {
+    this._about_us = about_us ? this._sanitizer(about_us) : null;
+    this._student_instructions = student_instructions ? this._sanitizer(student_instructions) : null;
+    this._company_instructions = company_instructions ? this._sanitizer(company_instructions) : null;
+    this._admin_instructions = admin_instructions ? this._sanitizer(admin_instructions) : null;
     return {
       _id: this._id,
       created_at: this._created_at,
@@ -50,7 +50,7 @@ export class Info extends Base{
       student_instructions: this._student_instructions,
       company_instructions: this._company_instructions,
       admin_instructions: this._admin_instructions,
-    };
+    } as IInfoEntity;
   }
 }
 

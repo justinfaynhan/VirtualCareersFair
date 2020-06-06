@@ -8,7 +8,7 @@ export interface IInvite {
 
 export interface IUsersList {
   type: string;
-  list: Array<IAdminCompany> | Array<IAdminStudent> | Array<IAdminAdmin>;
+  list: IAdminCompany[] | IAdminStudent[] | IAdminAdmin[];
 }
 export interface IAdminCompany {
   id: string;
@@ -20,6 +20,7 @@ export interface IAdminCompany {
 
 export interface IAdminStudent {
   id: string;
+  email: string;
   first_name?: string;
   last_name?: string;
   completed_profile?: number;

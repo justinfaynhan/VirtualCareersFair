@@ -14,9 +14,9 @@ const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
     const get_info = await websiteInfoDb.findOne();
     const new_info = await makeInfo.Make({
       about_us: dashboard.about_us,
-      admin_instructions: type === 'ADMIN' ? dashboard.instructions : get_info ? get_info.admin_instructions : '',
-      student_instructions: type === 'STUDENT' ? dashboard.instructions : get_info ? get_info.student_instructions : '',
-      company_instructions: type === 'COMPANY' ? dashboard.instructions : get_info ? get_info.company_instructions : ''
+      admin_instructions: type === 'ADMIN' ? dashboard.instructions : get_info && get_info.admin_instructions ? get_info.admin_instructions : undefined,
+      student_instructions: type === 'STUDENT' ? dashboard.instructions : get_info && get_info.student_instructions ? get_info.student_instructions : undefined,
+      company_instructions: type === 'COMPANY' ? dashboard.instructions : get_info && get_info.company_instructions ? get_info.company_instructions : undefined
     });
     if (get_info) {
       delete new_info.created_at;
@@ -30,7 +30,7 @@ const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
     if (type === 'STUDENT') instructions = updated_info.student_instructions;
     return {
       instructions,
-      about_us: updated_info.about_us
+      about_us: updated_info.about_us ? updated_info.about_us : undefined
     };
     // return {
     //   instructions: 'any',

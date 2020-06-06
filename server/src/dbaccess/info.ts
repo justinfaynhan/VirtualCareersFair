@@ -9,7 +9,6 @@ export const makeInfoDb: IMakeInfoDb = (makeDb) => {
   };
   const upsertOne = async ({_id, ...info}) => {
     const db = await makeDb();
-    const find_existing = await db.collection('Infos').findOne({_id});
     const res = await db.collection('Infos').findOneAndUpdate({_id}, {$set: info}, {returnOriginal: false, upsert: true});
     return res.value as IInfoEntity;
   };

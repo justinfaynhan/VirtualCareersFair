@@ -1,6 +1,11 @@
-import {IBaseEntity} from 'interfaces/entities/IBase.entity'
+import {IBaseEntity, IBaseEntityMakeArgs} from 'interfaces/entities/IBase.entity'
 
 export interface IUserEntity extends IBaseEntity {
-  email: string;
-  password: string;
+  email: string | null;
+  password: string | null;
+}
+
+export interface IUserEntityMakeArgs extends IBaseEntityMakeArgs {
+  email?: string;
+  password?: string;
 }

@@ -4,6 +4,7 @@ import {ICompanyDbAccess, IStudentDbAccess} from 'interfaces/dbaccess';
 import {IAnalyticsFull, IAnalyticsPre} from 'interfaces/ICompany';
 
 const makeGetCompanyAnalyticsData = (companyDb: ICompanyDbAccess, studentDb: IStudentDbAccess) => {
+  // working
   const getCompanyAnalyticsData: IGetCompanyAnalytics = async (id: string) => {
     const company = await companyDb.findById({_id: id});
     if (!company) {
@@ -15,25 +16,26 @@ const makeGetCompanyAnalyticsData = (companyDb: ICompanyDbAccess, studentDb: ISt
       };
     
     } else {
+      const data =  await ((company.page_analytics as IAnalyticsPre[]).reduce(async (results: any, analytic) => {
+        const student = await studentDb.findById({_id: analytic.id});
+        if (student === null) return results;
+        return {
+          id: analytic.id,
+          created_at: analytic.created_at,
+          first_name: student.first_name ? student.first_name : undefined,
+          last_name: student.last_name ? student.last_name : undefined,
+          about: student.about ? student.about : undefined,
+          skills: student.skills ? student.skills : [],
+          uni: student.uni ? student.uni : undefined,
+          degree: student.degree ? student.degree : undefined,
+          resume_link: student.resume_link ? student.resume_link : undefined,
+          linkedin_link: student.linkedin_link ? student.linkedin_link : undefined,
+          github_link: student.github_link ? student.github_link : undefined,
+          portfolio_link: student.portfolio_link ? student.portfolio_link : undefined
+        }
+      }, []));
       return {
-        data: ((company.page_analytics as IAnalyticsPre[]).reduce(async (results: any, analytic) => {
-          const student = await studentDb.findById({_id: analytic.id});
-          if (student === null) return results;
-          return {
-            id: analytic.id,
-            created_at: analytic.created_at,
-            first_name: student.first_name ? student.first_name : undefined,
-            last_name: student.last_name ? student.last_name : undefined,
-            about: student.about ? student.about : undefined,
-            skills: student.skills ? student.skills : [],
-            uni: student.uni ? student.uni : undefined,
-            degree: student.degree ? student.degree : undefined,
-            resume_link: student.resume_link ? student.resume_link : undefined,
-            linkedin_link: student.linkedin_link ? student.linkedin_link : undefined,
-            github_link: student.github_link ? student.github_link : undefined,
-            portfolio_link: student.portfolio_link ? student.portfolio_link : undefined
-          }
-        }, []))
+        data
       };
     };
 

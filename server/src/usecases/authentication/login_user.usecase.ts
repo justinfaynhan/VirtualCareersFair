@@ -22,17 +22,17 @@ const makeLoginUser = ({adminDb, companyDb, studentDb}: IDbs) => {
     let student_res = await studentDb.findByEmail({email});
 
     if (admin_res) {
-      if (!(await check(password, admin_res.password))) {
+      if (admin_res.password && !(await check(password, admin_res.password))) {
         throw new Error('Error logging in user, invalid password.');
       }
       authorization = 'ADMIN';
     } else if (company_res) {
-      if (!(await check(password, company_res.password))) {
+      if (company_res.password && !(await check(password, company_res.password))) {
         throw new Error('Error logging in user, invalid password.');
       }
       authorization = 'COMPANY';
     } else if (student_res) {
-      if (!(await check(password, student_res.password))) {
+      if (student_res.password && !(await check(password, student_res.password))) {
         throw new Error('Error logging in user, invalid password.');
       }
       authorization = 'STUDENT';

@@ -1,6 +1,6 @@
 import User, { IUserConstructor } from 'entities/User/user.entity';
 import {IAnalytics, IGraduateStory} from 'interfaces/ICompany';
-import {ICompanyEntity} from 'interfaces/entities/ICompany.entity';
+import {ICompanyEntity, ICompanyEntityMakeArgs} from 'interfaces/entities/ICompany.entity';
 
 export interface ICompanyConstructor extends IUserConstructor {
   sanitizer: (text: string) => string;
@@ -92,18 +92,26 @@ export class Company extends User {
     taking_interns,
     taking_graduates,
     page_analytics
-  }: Omit<ICompanyEntity, '_id'|'created_at'|'updated_at'>) {
+  }: ICompanyEntityMakeArgs) {
     logo_image;
-    if (this._email_validate(email)) {
-      this._email = email;
+    if (email) {
+      if (this._email_validate(email)) {
+        this._email = email;
+      } else {
+        throw new Error(`Error, '${email}' is an invalid email address.`)
+      }
     } else {
-      throw new Error(`Error, '${email}' is an invalid email address.`)
+      this._email = null;
     }
 
-    try {
-      this._password = await this._hash(password);
-    } catch {
-      throw new Error(`Error, failed to hash ${password}.`)
+    if (password) {
+      try {
+        this._password = await this._hash(password);
+      } catch {
+        throw new Error(`Error, failed to hash ${password}.`)
+      }
+    } else {
+      this._password = null;
     }
 
     this._name = name ? this._sanitizer(name) : null;
@@ -115,7 +123,7 @@ export class Company extends User {
       role: this._sanitizer(story.role),
       summary: this._sanitizer(story.summary),
       story: this._sanitizer(story.story)
-    })) : [];
+    })) : null;
     this._website_link = website_link ? this._sanitizer(website_link) : null;
     this._contact_email = contact_email ? this._sanitizer(contact_email) : null;
     this._video = video ? this._sanitizer(video) : null;
@@ -123,7 +131,7 @@ export class Company extends User {
     this._logo_image = logo_image ? this._sanitizer(logo_image) : null
     this._taking_interns = taking_interns ? taking_interns : null;
     this._taking_graduates = taking_graduates ? taking_graduates : null;
-    this._page_analytics = page_analytics ? page_analytics : [];
+    this._page_analytics = page_analytics ? page_analytics : null;
     
     return {
       _id: this._id,
@@ -143,7 +151,7 @@ export class Company extends User {
       taking_interns: this._taking_interns,
       taking_graduates: this._taking_graduates,
       page_analytics: this._page_analytics
-    };
+    } as ICompanyEntity;
   }
 }
 

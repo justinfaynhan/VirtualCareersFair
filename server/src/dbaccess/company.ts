@@ -19,8 +19,8 @@ export const makeCompanyDb: IMakeCompanyDb = (makeDb) => {
   }
   const updateOne = async ({_id, ...companyInfo}) => {
     const db = await makeDb();
-    const res = await db.collection('Companies').findOneAndUpdate({_id}, companyInfo, {returnOriginal: false});
-    return res as ICompanyEntity;
+    const res = await db.collection('Companies').findOneAndUpdate({_id}, {$set: companyInfo}, {returnOriginal: false});
+    return res.value as ICompanyEntity;
   };
   const insertOne = async ({...companyInfo}) => {
     const db = await makeDb();

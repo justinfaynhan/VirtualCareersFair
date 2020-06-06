@@ -1,5 +1,8 @@
 export interface IBaseEntity {
-  _id: string;
-  created_at: Date | string | number;
-  updated_at: Date | string | number;
+  _id: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface IBaseEntityMakeArgs {
 }

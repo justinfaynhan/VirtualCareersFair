@@ -8,7 +8,7 @@ const makeUpdateCompanyInfo = (updateCompanyInfo: IUpdateCompanyInfo) => {
     }
     try {
       const id = httpRequest.params.id;
-      const info = httpRequest.params.body;
+      const info = httpRequest.body;
       const new_info = await updateCompanyInfo(id, info);
       return {
         headers,

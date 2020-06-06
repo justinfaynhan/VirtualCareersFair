@@ -127,12 +127,12 @@ export class Student extends Controller {
     @Query() user_token: string,
     @Path('id') id: string,
     @Body() new_profile: {
-      first_name: string;
-      last_name: string;
-      about: string;
-      skills: Array<string>;
-      uni: string;
-      degree: string;
+      first_name?: string;
+      last_name?: string;
+      about?: string;
+      skills?: string[];
+      uni?: string;
+      degree?: string;
       resume_link?: string;
       linkedin_link?: string;
       github_link?: string;
@@ -155,13 +155,17 @@ export class Company extends Controller {
     @Query() user_token: string,
     @Path('id') id: string,
     @Body() new_info: {
-      id: string;
-      name: string;
-      overview: string;
-      graduate_stories: Array<string>;
-      videos: string;
-      website: string;
-      contact_info: string;
+      name?: string;
+      overview?: string;
+      graduate_stories?: {
+        name: string,
+        role: string,
+        summary: string,
+        story: string
+      }[];
+      videos?: string;
+      website?: string;
+      contact_info?: string;
     },
     @Request() request: express.Request
   ): Promise<any> {
