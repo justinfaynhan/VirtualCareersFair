@@ -7,10 +7,10 @@ const makeRegister = (register: IRegister) => {
       'Content-Type': 'application/json'
     }
     try {
-      const username: string = httpRequest.query.username;
+      const email: string = httpRequest.query.email;
       const password: string = httpRequest.query.password;
       const invite_code: string = httpRequest.query.invite_code;
-      const token = await register(username, password, invite_code);
+      const token = await register(email, password, invite_code);
       return {
         headers,
         statusCode: 200,

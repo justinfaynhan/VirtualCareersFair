@@ -5,6 +5,7 @@ const makeGetCompanyAnalyticsData = (companyDb) => {
     return {
       data: [{
         id: 'saudiewqurniewrew',
+        created_at: '1/1/20',
         first_name: 'hihi',
         last_name: 'hehe',
         about: 'my name is hihi hehhe and I would like a job ty',

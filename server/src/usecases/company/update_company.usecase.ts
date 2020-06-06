@@ -7,7 +7,12 @@ const makeUpdateCompany = (companyDb) => {
       name: 'jojo',
       slogan: 'oraoraora',
       overview: 'bizzare adventures',
-      graduate_stories: ['wow'],
+      graduate_stories: [{
+        name: 'Johnny',
+        role: 'CEO',
+        summary: 'SWAG goes miles',
+        story: 'once upon a time...'
+      }],
       videos: 'www.youtube.com',
       website: 'www.google.com',
       contact_info: 'contact@google.com'

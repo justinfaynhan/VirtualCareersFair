@@ -1,15 +1,35 @@
-import User from 'entities/User/user.entity';
+import User, {IUserConstructor} from 'entities/User/user.entity';
+import {IAdminEntity} from 'interfaces/entities/IAdmin.entity';
 
+interface IAdminConstructor extends IUserConstructor{
+}
 export class Admin extends User {
 
-  constructor(
-    id: () => number|string, 
-    hash: (password: string) => string, 
-  ) {
-    super(id, hash);
+  constructor(args: IAdminConstructor) {
+    super(args);
   }
-  Make() {
-    
+  async Make({
+    email,
+    password
+  }: Omit<IAdminEntity, '_id'|'created_at'|'updated_at'>) {
+    if (this._email_validate(email)) {
+      this._email = email;
+    } else {
+      throw new Error(`Error, '${email}' is an invalid email address.`)
+    }
+
+    try {
+      this._password = await this._hash(password);
+    } catch {
+      throw new Error(`Error, failed to hash ${password}.`)
+    }
+    return {
+      _id: this._id,
+      created_at: this._created_at,
+      updated_at: this._updated_at,
+      email: this._email,
+      password: this._password
+    };
   }
 }
 export default Admin;

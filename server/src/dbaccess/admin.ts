@@ -1,17 +1,34 @@
-export const makeAdminDb = (makeDb) => {
+import {IMakeAdminDb} from 'interfaces/dbaccess/IAdminDb';
+
+export const makeAdminDb: IMakeAdminDb = (makeDb) => {
   const findAll = async () => {
-
+    const db = await makeDb();
+    const res = db.collection('Admins').find({});
+    return (await res.toArray()).map(({_id, ...found}) => ({
+      _id,
+      ...found
+    }))
   };
-  const findOne = async () => {
-
+  const findById = async ({_id}) => {
+    const db = await makeDb();
+    const res = await (db.collection('Admins').findOne({_id}));
+    return res;    
   };
-  const insert = async () => {
-
+  const findByEmail = async ({email}) => {
+    const db = await makeDb();
+    const res = await (db.collection('Admins').findOne({email}));
+    return res;
+  }
+  const insertOne = async ({...adminInfo}) => {
+    const db = await makeDb();
+    const res = await db.collection('Admins').insertOne({...adminInfo});
+    return res.ops[0];
   };
   return Object.freeze({
     findAll,
-    findOne,    
-    insert
+    findById,
+    findByEmail, 
+    insertOne
   });
 }
 export default makeAdminDb;

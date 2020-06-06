@@ -7,7 +7,10 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "src",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false
   },
   "lib": ["es2015"],
   "include": ["src"]
