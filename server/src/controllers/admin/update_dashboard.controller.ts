@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
-import {IUpdateDashboard} from 'interfaces/IDashboard';
+import {IUpdateDashboard, IDashboard} from 'interfaces/IDashboard';
+import {is_authorized} from 'utils/auth';
 
 const makeUpdateDashboardInfo = (updateDashboard: IUpdateDashboard) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,8 +8,11 @@ const makeUpdateDashboardInfo = (updateDashboard: IUpdateDashboard) => {
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+      if (!authorizations.includes('ADMIN')) throw new Error('Unauthorized, must be ADMIN.');
+
       const type: string = httpRequest.params.type;
-      const dashboard: any = httpRequest.body;
+      const dashboard: IDashboard = JSON.parse(httpRequest.body);
       const new_dashboard = await updateDashboard(type, dashboard);
       return {
         headers,

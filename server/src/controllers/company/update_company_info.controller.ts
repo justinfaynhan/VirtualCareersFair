@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
 import {IUpdateCompanyInfo, ICompanyInfo} from 'interfaces/ICompany';
+import {is_authorized} from 'utils/auth';
 
 const makeUpdateCompanyInfo = (updateCompanyInfo: IUpdateCompanyInfo) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,6 +8,9 @@ const makeUpdateCompanyInfo = (updateCompanyInfo: IUpdateCompanyInfo) => {
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+      if (!authorizations.includes('COMPANY')) throw new Error('Unauthorized, must be COMPANY.');
+      
       const id = httpRequest.params.id;
       const info = httpRequest.body;
       const new_info = await updateCompanyInfo(id, info);

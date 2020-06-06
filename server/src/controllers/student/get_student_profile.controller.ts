@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
 import {IGetStudentProfile, IStudentProfile} from 'interfaces/IStudent';
+import {is_authorized} from 'utils/auth';
 
 const makeGetStudentProfile = (getStudentProfile: IGetStudentProfile) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,6 +8,8 @@ const makeGetStudentProfile = (getStudentProfile: IGetStudentProfile) => {
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+      
       const id: string = httpRequest.params.id;
       const profile = await getStudentProfile(id);
       return {

@@ -26,22 +26,24 @@ export const setupDb = async () => {
     const Invite = db.model<IInvite>('Invite', InviteSchema, 'Invites');
     console.log('Mongoose connection successfully created model schemas');
 
-    if (config.MODE === 'DEV') {
-      console.warn('Resetting database... change config.MODE to PROD to prevent this behaviour.');
-      seedDb(db, {Student, Admin, Company, Info, Invite});
-    } else {
-      const default_admin_account = await makeAdmin.Make({email: config.ADMIN.default.EMAIL, password: config.ADMIN.default.PASSWORD});
-      try {
-        const res = await Admin.create(default_admin_account);
-        console.log('Created default admin account with email: ' + config.ADMIN.default.EMAIL);
-      } catch(e) {
-        console.log('Error creating default admin role: ' + e);
-      }
+    // seedDb(db, {Student, Admin, Company, Info, Invite}); // warning this will reset the db and populate with dummy data.
+
+    const default_admin_account = await makeAdmin.Make({email: config.ADMIN.default.EMAIL, password: config.ADMIN.default.PASSWORD});
+    try {
+      Admin.create(default_admin_account);
+      console.log('Creating default admin account with email: ' + config.ADMIN.default.EMAIL + '...');
+    } catch(e) {
+      console.log('Error creating default admin role: ' + e);
     }
+    
     if ((await Info.findOne()) === null) {
       console.log('No existing website info entry, creating one...');
       const info = await makeInfo.Make({about_us: "testing", student_instructions: "", company_instructions: "", admin_instructions: ""});
-      Info.create(info);
+      try {
+        Info.create(info);
+      } catch(e) {
+        console.error('Error creating website info entry: ' + e);
+      }
     }
   });
 

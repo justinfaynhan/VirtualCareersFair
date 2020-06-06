@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
 import {IGetCompanyAnalytics, IAnalytics} from 'interfaces/ICompany';
+import {is_authorized} from 'utils/auth';
 
 const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,6 +8,9 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+      if (!authorizations.includes('COMPANY')) throw new Error('Unauthorized, must be COMPANY.');
+      
       const id = httpRequest.params.id;
       const analytics = await getCompanyAnalytics(id);
       return {

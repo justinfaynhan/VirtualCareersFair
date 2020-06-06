@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
 import {IGetDashboard, IDashboard} from 'interfaces/IDashboard';
+import {is_authorized} from 'utils/auth';
 
 const makeGetDashboardInfo = (getDashboard: IGetDashboard) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,6 +8,8 @@ const makeGetDashboardInfo = (getDashboard: IGetDashboard) => {
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+      
       const type: string = httpRequest.params.type;
       const dashboard = await getDashboard(type);
       return {

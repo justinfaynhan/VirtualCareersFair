@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
 import {IGetCareersFairLanding, ICareersFairLandingCompany} from 'interfaces/ICareersFair';
+import {is_authorized} from 'utils/auth';
 
 const makeGetCareersFairLanding = (getCareersFairLanding: IGetCareersFairLanding) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,6 +8,8 @@ const makeGetCareersFairLanding = (getCareersFairLanding: IGetCareersFairLanding
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+
       const careersFair = await getCareersFairLanding();
       return {
         headers,

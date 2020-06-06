@@ -1,5 +1,6 @@
 import {IHttpRequest} from 'interfaces/IHttp';
 import {IUpdateStudentProfile, IStudentProfile} from 'interfaces/IStudent';
+import {is_authorized} from 'utils/auth';
 
 const makeUpdateStudentProfile = (updateStudentProfile: IUpdateStudentProfile) => {
   return async (httpRequest: IHttpRequest) => {
@@ -7,6 +8,9 @@ const makeUpdateStudentProfile = (updateStudentProfile: IUpdateStudentProfile) =
       'Content-Type': 'application/json'
     }
     try {
+      const authorizations = is_authorized(httpRequest.query.user_token);
+      if (!authorizations.includes('STUDENT')) throw new Error('Unauthorized, must be STUDENT.');
+
       const id: string = httpRequest.params.id;
       const profile: any = httpRequest.body;
       const new_profile  = await updateStudentProfile({...profile, id});
