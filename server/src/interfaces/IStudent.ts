@@ -1,6 +1,6 @@
 export type IGetStudentProfile = (id: string) => Promise<IStudentProfile>;
 
-export type IUpdateStudentProfile = (id: string, profile: any) => Promise<IStudentProfile>;
+export type IUpdateStudentProfile = ({id, ...profile}: IStudentProfile) => Promise<IStudentProfile>;
 
 export interface IStudentProfile {
   id: string;
@@ -10,8 +10,8 @@ export interface IStudentProfile {
   skills: Array<string>;
   uni: string;
   degree: string;
-  resume_link?: string;
-  linkedin_link?: string;
-  github_link?: string;
-  portfolio_link?: string;
+  resume_link: string;
+  linkedin_link: string;
+  github_link: string;
+  portfolio_link: string;
 }

@@ -9,7 +9,7 @@ const makeUpdateStudentProfile = (updateStudentProfile: IUpdateStudentProfile) =
     try {
       const id: string = httpRequest.params.id;
       const profile: any = httpRequest.body;
-      const new_profile  = await updateStudentProfile(id, profile);
+      const new_profile  = await updateStudentProfile({...profile, id});
       return {
         headers,
         statusCode: 200,

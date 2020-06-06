@@ -12,20 +12,20 @@ export interface IUsersList {
 }
 export interface IAdminCompany {
   id: string;
-  name?: string;
+  name: string;
   email: string;
   filled_info: number;
-  contact_info?: any;
+  contact_info: any;
 }
 
 export interface IAdminStudent {
   id: string;
   email: string;
-  first_name?: string;
-  last_name?: string;
-  completed_profile?: number;
-  uni?: string;
-  degree?: string;
+  first_name: string;
+  last_name: string;
+  completed_profile: number;
+  uni: string;
+  degree: string;
 }
 
 export interface IAdminAdmin {

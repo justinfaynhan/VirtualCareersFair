@@ -15,7 +15,6 @@ interface IDbs {
 
 const makeRegisterUser = ({adminDb, companyDb, studentDb}: IDbs, inviteCodeDb: IInviteDbAccess) => {
   const registerUser: IRegister = async (email: string, password: string, invite_code: string) => {
-    // working
     const res = await inviteCodeDb.findByCode({invite_code});
     if (res === null) {
       throw new Error("Error, invalid invite code provided.");

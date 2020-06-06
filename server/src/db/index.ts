@@ -8,7 +8,7 @@ import {InfoSchema} from 'db/info.schema';
 import {InviteSchema} from 'db/invite.schema';
 
 import {IStudent, IAdmin, ICompany, IInfo, IInvite} from 'interfaces/db';
-import {makeAdmin} from 'entities';
+import {makeAdmin, makeInfo} from 'entities';
 
 import {seedDb} from 'db/seed';
 
@@ -37,6 +37,11 @@ export const setupDb = async () => {
       } catch(e) {
         console.log('Error creating default admin role: ' + e);
       }
+    }
+    if ((await Info.findOne()) === null) {
+      console.log('No existing website info entry, creating one...');
+      const info = await makeInfo.Make({about_us: "testing", student_instructions: "", company_instructions: "", admin_instructions: ""});
+      Info.create(info);
     }
   });
 

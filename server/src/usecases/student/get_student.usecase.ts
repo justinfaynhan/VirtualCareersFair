@@ -1,19 +1,23 @@
 import {IGetStudentProfile} from 'interfaces/IStudent';
-
-const makeGetStudent = (userDb) => {
+import {IStudentDbAccess} from 'interfaces/dbaccess';
+const makeGetStudent = (studentDb: IStudentDbAccess) => {
   const getStudent: IGetStudentProfile = async (id: string) => {
+    const student = await studentDb.findById({_id: id});
+    if (student === null) {
+      throw new Error (`Error retrieving student with id ${id}.`);
+    }
     return {
-      id: 'jerkfdsfoewnroew',
-      first_name: 'hihi',
-      last_name: 'hehe',
-      about: 'my name is hihi hehhe and I would like a job ty',
-      skills: ['coding', 'talking', 'sitting', 'eating'],
-      uni: 'matheletics',
-      degree: 'bachelor of matheletics',
-      resume_link: 'https://www.google.com',
-      linkedin_link: 'https://www.linkedin.com',
-      github_link: 'https://www.github.com',
-      portfolio_link: 'https://www.hihihihehehe.io',
+      id,
+      first_name: student.first_name ? student.first_name : '',
+      last_name: student.last_name ? student.last_name : '',
+      about: student.about ? student.about : '',
+      skills: student.skills ? student.skills : [],
+      uni: student.uni ? student.uni : '',
+      degree: student.degree ? student.degree : '',
+      resume_link: student.resume_link ? student.resume_link : '',
+      linkedin_link: student.linkedin_link ? student.linkedin_link : '',
+      github_link: student.github_link ? student.github_link : '',
+      portfolio_link: student.portfolio_link ? student.portfolio_link : ''
     }
   }
   return getStudent;

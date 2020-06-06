@@ -1,20 +1,27 @@
 import {IUpdateStudentProfile} from 'interfaces/IStudent';
+import {IStudentDbAccess} from 'interfaces/dbaccess';
+import {makeStudent} from 'entities';
 
-const makeUpdateStudent = (userDb) => {
-  const updateStudent: IUpdateStudentProfile = async (id, profile) => {
+const makeUpdateStudent = (studentDb: IStudentDbAccess) => {
+  const updateStudent: IUpdateStudentProfile = async ({id, ...profile}) => {
+    const student = await makeStudent.Make(profile);
+    const res = await studentDb.updateOne({...student, _id: id});
+    if (res === null) {
+      throw new Error(`Error updating student with id ${id}.`);
+    }
     return {
-      id: 'sadjnwqnjewnrewrew',
-      first_name: 'hihi',
-      last_name: 'hehe',
-      about: 'my name is hihi hehhe and I would like a job ty',
-      skills: ['coding', 'talking', 'sitting', 'eating'],
-      uni: 'matheletics',
-      degree: 'bachelor of matheletics',
-      resume_link: 'https://www.google.com',
-      linkedin_link: 'https://www.linkedin.com',
-      github_link: 'https://www.github.com',
-      portfolio_link: 'https://www.hihihihehehe.io',
-    };
+      id,
+      first_name: res.first_name ? res.first_name : '',
+      last_name: res.last_name ? res.last_name : '',
+      about: res.about ? res.about : '',
+      skills: res.skills ? res.skills : [],
+      uni: res.uni ? res.uni : '',
+      degree: res.degree ? res.degree : '',
+      resume_link: res.resume_link ? res.resume_link : '',
+      linkedin_link: res.linkedin_link ? res.linkedin_link : '',
+      github_link: res.github_link ? res.github_link : '',
+      portfolio_link: res.portfolio_link ? res.portfolio_link : '',
+    }
   }
   return updateStudent;
 }

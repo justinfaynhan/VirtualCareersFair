@@ -7,7 +7,6 @@ import {makeInfo} from 'entities/Info';
 
 const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
   const updateWebsiteInfo: IUpdateDashboard = async (type, dashboard) => {
-    // working
     if (type !== 'ADMIN' && type !== 'STUDENT' && type !== 'COMPANY') {
       throw new Error(`Error, provided type arg '${type} is invalid, must be STUDENT, ADMIN or COMPANY`);
     }
@@ -32,10 +31,6 @@ const makeUpdateWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
       instructions,
       about_us: updated_info.about_us ? updated_info.about_us : undefined
     };
-    // return {
-    //   instructions: 'any',
-    //   about_us: 'any',
-    // }
   }
   return updateWebsiteInfo;
 }
