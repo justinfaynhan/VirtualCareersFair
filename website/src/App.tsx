@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./style/App.scss";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import GlobalState from "Context/GlobalState";
+import LoginRegisterPage from "pages/RegisterLogin/loginRegisterPage";
+import CredentialServices from "Services/CredentialService";
+import Routes from "Routes/AppRoutes";
 
 function App() {
+  const credService: CredentialServices = new CredentialServices();
+  const userAuth = credService.GetUserCredentials();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalState>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route path={Routes.root} exact>
+              {userAuth == null ? (
+                <Redirect to={Routes.login} />
+              ) : (
+                <h4>Hello World</h4>
+              )}
+            </Route>
+            <Route path={Routes.login}>
+              <LoginRegisterPage />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </GlobalState>
   );
 }
 

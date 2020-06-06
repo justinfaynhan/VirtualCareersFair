@@ -6,7 +6,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "website-install": "cd website && yarn",
+    "website-install": "cd website && yarn install",
     "website": "cd website && yarn start",
     "server-install": "cd server && yarn",
     "server": "cd server && yarn generate && yarn start"
