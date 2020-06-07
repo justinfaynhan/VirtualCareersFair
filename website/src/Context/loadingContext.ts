@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
 export default React.createContext({
   isLoading: false,
-  loadingMessage: "",
+  loadingMessage: '',
   // update the AuthToken
   toggleLoadingOn: (message: string) => {},
   toggleLoadingOff: () => {},
-});
+})

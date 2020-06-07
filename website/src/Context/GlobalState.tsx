@@ -1,43 +1,43 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import UserContext from "./userContext";
-import LoadingContext from "./loadingContext";
+import UserContext from './userContext'
+import LoadingContext from './loadingContext'
 
 const GlobalState = (props) => {
   // authToken Provider
-  const [AuthToken, setAuthToken] = useState("");
+  const [AuthToken, setAuthToken] = useState('')
   // loading state provider
   const [LoadingState, setLoadingState] = useState({
     isLoading: false,
-    loadingMessage: "",
-  });
+    loadingMessage: '',
+  })
 
   // auth token provider functions
   const isUserAuthenticated = () => {
     if (AuthToken) {
-      return true;
+      return true
     }
-    return false;
-  };
+    return false
+  }
 
   const updateAuthToken = (token: string) => {
-    setAuthToken(token);
-  };
+    setAuthToken(token)
+  }
 
   // loading state provider functions
   const toggleLoadingOn = (message: string) => {
     setLoadingState({
       isLoading: true,
       loadingMessage: message,
-    });
-  };
+    })
+  }
 
   const toggleLoadingOff = () => {
     setLoadingState({
       isLoading: false,
-      loadingMessage: "",
-    });
-  };
+      loadingMessage: '',
+    })
+  }
 
   return (
     <UserContext.Provider
@@ -58,7 +58,7 @@ const GlobalState = (props) => {
         {props.children}
       </LoadingContext.Provider>
     </UserContext.Provider>
-  );
-};
+  )
+}
 
-export default GlobalState;
+export default GlobalState

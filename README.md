@@ -23,3 +23,7 @@ Run server
 ```bash
 yarn server
 ```
+
+## Acknowledgements
+
+Code for eslint and prettier for the website has been taken from [taniarascia/takenote](https://github.com/taniarascia/takenote).
