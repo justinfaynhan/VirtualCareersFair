@@ -1,5 +1,5 @@
 import User, { IUserConstructor } from 'entities/User/user.entity';
-import {IAnalytics, IGraduateStory} from 'interfaces/ICompany';
+import {IAnalyticsPre, IGraduateStory} from 'interfaces/ICompany';
 import {ICompanyEntity, ICompanyEntityMakeArgs} from 'interfaces/entities/ICompany.entity';
 
 export interface ICompanyConstructor extends IUserConstructor {
@@ -13,7 +13,7 @@ export class Company extends User {
   private _name: string | null;
   private _slogan: string | null;
   private _overview: string | null;
-  private _graduate_stories: Array<IGraduateStory> | null;
+  private _graduate_stories: IGraduateStory[] | null;
   private _website_link: string | null;
   private _contact_email: string | null;
   private _video: string | null;
@@ -21,7 +21,7 @@ export class Company extends User {
   private _logo_image: string | null;
   private _taking_interns: boolean | null;
   private _taking_graduates: boolean | null;
-  private _page_analytics: IAnalytics | null;
+  private _page_analytics: IAnalyticsPre[] | null;
 
   constructor(args: ICompanyConstructor) {
     super({hash: args.hash, email_validate: args.email_validate, id_gen: args.id_gen, password_validate: args.password_validate});
@@ -78,6 +78,9 @@ export class Company extends User {
     return this._page_analytics;
   }
   async Make({
+    _id,
+    created_at,
+    updated_at,
     email,
     password,
     name,
@@ -96,6 +99,10 @@ export class Company extends User {
     await this.setEmail(email);
     await this.setPassword(password);
 
+    this._id = _id ? _id : this._id;
+    this._created_at = created_at ? created_at : this._created_at;
+    this._updated_at = updated_at ? updated_at : this._updated_at;
+
     this._name = name ? this._sanitizer(name) : null;
     this._slogan = slogan ? this._sanitizer(slogan) : null;
 
@@ -105,7 +112,7 @@ export class Company extends User {
       role: this._sanitizer(story.role),
       summary: this._sanitizer(story.summary),
       story: this._sanitizer(story.story)
-    })) : null;
+    })) : [];
     this._website_link = website_link ? this._sanitizer(website_link) : null;
     this._contact_email = contact_email ? this._sanitizer(contact_email) : null;
     this._video = video ? this._sanitizer(video) : null;
@@ -113,7 +120,7 @@ export class Company extends User {
     this._logo_image = logo_image ? this._sanitizer(logo_image) : null
     this._taking_interns = taking_interns ? taking_interns : null;
     this._taking_graduates = taking_graduates ? taking_graduates : null;
-    this._page_analytics = page_analytics ? page_analytics : null;
+    this._page_analytics = page_analytics ? page_analytics : [];
     
     return {
       _id: this._id,

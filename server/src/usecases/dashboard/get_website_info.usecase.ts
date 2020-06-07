@@ -19,7 +19,7 @@ const makeGetWebsiteInfo = (websiteInfoDb: IInfoDbAccess) => {
     }
     return {
       instructions,
-      about_us: info.about_us ? info.about_us : ''
+      about_us: info.about_us
     }
   }
   return getWebsiteInfo;

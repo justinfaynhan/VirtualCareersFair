@@ -12,7 +12,7 @@ const makeUpdateCompanyInfo = (updateCompanyInfo: IUpdateCompanyInfo) => {
       if (!authorizations.includes('COMPANY')) throw new Error('Unauthorized, must be COMPANY.');
       
       const id = httpRequest.params.id;
-      const info = httpRequest.body;
+      const info: any = httpRequest.body;
       const new_info = await updateCompanyInfo(id, info);
       return {
         headers,
@@ -21,7 +21,7 @@ const makeUpdateCompanyInfo = (updateCompanyInfo: IUpdateCompanyInfo) => {
       }
     } catch (e) {
       // TODO: Error logging
-      console.log(e)
+      console.error(e)
       return {
         headers,
         statusCode: 400,

@@ -1,4 +1,4 @@
-import {IGetCareersFairLanding} from 'interfaces/ICareersFair';
+import {IGetCareersFairLanding, ICareersFairLanding} from 'interfaces/ICareersFair';
 
 import {ICompanyDbAccess} from 'interfaces/dbaccess';
 
@@ -9,12 +9,12 @@ const makeGetCareersFair = (companyDb: ICompanyDbAccess) => {
     const all = (await companyDb.findAll());
     return {
       companies: all.map((company) => ({
-        id: company._id ? company._id : '',
-        name: company.name ? company.name : '',
-        logo: company.logo_image ? company.logo_image : '',
-        banner_image: company.banner_image ? company.banner_image : '',
-        taking_interns: company.taking_interns ? company.taking_interns : null,
-        taking_graduates: company.taking_graduates ? company.taking_graduates : null
+        id: company._id,
+        name: company.name,
+        logo: company.logo_image,
+        banner_image: company.banner_image,
+        taking_interns: company.taking_interns,
+        taking_graduates: company.taking_graduates
       }))
     }
   }

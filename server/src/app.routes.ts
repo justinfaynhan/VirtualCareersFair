@@ -156,6 +156,7 @@ export class Company extends Controller {
     @Path('id') id: string,
     @Body() new_info: {
       name?: string;
+      slogan?: string;
       overview?: string;
       graduate_stories?: {
         name: string,
@@ -163,9 +164,13 @@ export class Company extends Controller {
         summary: string,
         story: string
       }[];
-      videos?: string;
       website?: string;
       contact_info?: string;
+      videos?: string;
+      banner_image?: string;
+      logo_image?: string;
+      taking_interns?: boolean;
+      taking_graduates?: boolean;
     },
     @Request() request: express.Request
   ): Promise<any> {
@@ -244,7 +249,7 @@ export class Admin extends Controller {
     @Path('type') type: string,
     @Body() new_info: {
       instructions: string;
-      about_us: string;
+      about_us?: string;
     },
     @Request() request: express.Request
   ): Promise<any> {

@@ -14,7 +14,7 @@ interface IDbs {
 }
 
 const makeLoginUser = ({adminDb, companyDb, studentDb}: IDbs) => {
-  const loginUser: ILogin = async (email: string, password: string) => {
+  const loginUser: ILogin = async (email, password) => {
     let authorization: IAuthorizationTypes;
     let admin_res = await adminDb.findByEmail({email});
     let company_res = await companyDb.findByEmail({email});

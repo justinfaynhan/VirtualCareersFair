@@ -1,9 +1,9 @@
 import {IMakeDb} from 'interfaces/dbaccess';
-import {IInfoEntity} from 'interfaces/entities';
+import {IInfoEntity, IInfoData} from 'interfaces/entities/IInfo.entity';
 
 export interface IInfoDbAccess {
-  findOne: () => Promise<IInfoEntity | null>;
-  upsertOne: ({}: IInfoEntity) => Promise<IInfoEntity>;
+  findOne: () => Promise<IInfoData | null>;
+  upsertOne: ({}: IInfoEntity) => Promise<IInfoData>;
 }
 
 export type IMakeInfoDb = (makeDb: IMakeDb) => IInfoDbAccess;

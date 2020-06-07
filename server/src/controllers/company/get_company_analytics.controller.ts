@@ -1,5 +1,5 @@
 import {IHttpRequest} from 'interfaces/IHttp';
-import {IGetCompanyAnalytics, IAnalytics} from 'interfaces/ICompany';
+import {IGetCompanyAnalytics} from 'interfaces/ICompany';
 import {is_authorized} from 'utils/auth';
 
 const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
@@ -20,7 +20,7 @@ const makeGetCompanyAnalytics = (getCompanyAnalytics: IGetCompanyAnalytics) => {
       }
     } catch (e) {
       // TODO: Error logging
-      console.log(e)
+      console.error(e)
       return {
         headers,
         statusCode: 400,

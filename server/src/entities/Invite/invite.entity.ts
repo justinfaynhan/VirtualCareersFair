@@ -12,7 +12,7 @@ export class Invite extends Base {
 
   private _invite_code: string | null;
   private _privilege: IAuthorizationTypes | null;
-  private _expiry: Date | string | null;
+  private _expiry: string | null;
 
   constructor(args: IInviteConstructor) {
     super({id_gen: args.id_gen});
@@ -29,7 +29,17 @@ export class Invite extends Base {
   get expiry() {
     return this._expiry;
   }
-  async Make({privilege, expiry}: IInviteEntityMakeArgs) {
+  async Make({
+    _id, 
+    created_at, 
+    updated_at, 
+    privilege, 
+    expiry
+  }: IInviteEntityMakeArgs) {
+    this._id = _id ? _id : this._id;
+    this._created_at = created_at ? created_at : this._created_at;
+    this._updated_at = updated_at ? updated_at : this._updated_at;
+
     this._invite_code = this._code_gen();
     if (privilege === 'ADMIN' || privilege === 'STUDENT' || privilege === 'COMPANY') {
       this._privilege = privilege;

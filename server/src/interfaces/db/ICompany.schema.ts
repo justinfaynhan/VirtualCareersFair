@@ -1,5 +1,5 @@
 import {IUser} from 'interfaces/db/IUser.schema';
-import {IAnalytics} from 'interfaces/ICompany';
+import {IAnalyticsPre} from 'interfaces/ICompany';
 
 export interface ICompany extends IUser {
   name: string;
@@ -13,5 +13,5 @@ export interface ICompany extends IUser {
   logo_image: string;
   taking_interns: boolean;
   taking_graduates: boolean;
-  page_analytics: Array<IAnalytics>
+  page_analytics: Array<IAnalyticsPre>
 };

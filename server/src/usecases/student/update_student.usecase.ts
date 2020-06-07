@@ -11,16 +11,17 @@ const makeUpdateStudent = (studentDb: IStudentDbAccess) => {
     }
     return {
       id,
-      first_name: res.first_name ? res.first_name : '',
-      last_name: res.last_name ? res.last_name : '',
-      about: res.about ? res.about : '',
-      skills: res.skills ? res.skills : [],
-      uni: res.uni ? res.uni : '',
-      degree: res.degree ? res.degree : '',
-      resume_link: res.resume_link ? res.resume_link : '',
-      linkedin_link: res.linkedin_link ? res.linkedin_link : '',
-      github_link: res.github_link ? res.github_link : '',
-      portfolio_link: res.portfolio_link ? res.portfolio_link : '',
+      email: res.email,
+      first_name: res.first_name,
+      last_name: res.last_name,
+      about: res.about,
+      skills: res.skills,
+      uni: res.uni,
+      degree: res.degree,
+      resume_link: res.resume_link,
+      linkedin_link: res.linkedin_link,
+      github_link: res.github_link,
+      portfolio_link: res.portfolio_link,
     }
   }
   return updateStudent;

@@ -1,10 +1,10 @@
 import {IMakeDb} from 'interfaces/dbaccess';
-import {IInviteEntity} from 'interfaces/entities';
+import {IInviteEntity, IInviteData} from 'interfaces/entities/IInvite.entity';
 
 export interface IInviteDbAccess {
-  findById: ({_id}: {_id: string}) => Promise<IInviteEntity | null>;
-  findByCode: ({invite_code}: {invite_code: string}) => Promise<IInviteEntity | null>;
-  insertOne: ({} : IInviteEntity) => Promise<IInviteEntity>;
+  findById: ({_id}: {_id: string}) => Promise<IInviteData | null>;
+  findByCode: ({invite_code}: {invite_code: string}) => Promise<IInviteData | null>;
+  insertOne: ({} : IInviteEntity) => Promise<IInviteData>;
   removeOne: ({_id}: {_id: string}) => Promise<number | undefined>;
 }
 

@@ -10,7 +10,7 @@ import {ICompanyEntity} from 'interfaces/entities';
 import {IAnalyticsFull, IAnalyticsPre} from 'interfaces/ICompany';
 
 const makeGetCompanyAnalyticsFile = (companyDb: ICompanyDbAccess, studentDb: IStudentDbAccess) => {
-  const getCompanyAnalyticsFile: IGetCompanyAnalyticsDownload = async (id: string) => {
+  const getCompanyAnalyticsFile: IGetCompanyAnalyticsDownload = async (id) => {
     const company = await companyDb.findById({_id: id});
     if (!company) {
       throw new Error(`Error, could not find company with id ${id}.`);
@@ -28,17 +28,17 @@ const makeGetCompanyAnalyticsFile = (companyDb: ICompanyDbAccess, studentDb: ISt
         if (student === null) return results;
         const records = [{
           id: analytic.id,
-          created_at: String(analytic.created_at),
-          first_name: student.first_name ? student.first_name : '',
-          last_name: student.last_name ? student.last_name : '',
-          about: student.about ? student.about : '',
-          skills: student.skills ? student.skills : [],
-          uni: student.uni ? student.uni : '',
-          degree: student.degree ? student.degree : '',
-          resume_link: student.resume_link ? student.resume_link : '',
-          linkedin_link: student.linkedin_link ? student.linkedin_link : '',
-          github_link: student.github_link ? student.github_link : '',
-          portfolio_link: student.portfolio_link ? student.portfolio_link : ''
+          created_at: analytic.created_at,
+          first_name: student.first_name,
+          last_name: student.last_name,
+          about: student.about,
+          skills: student.skills,
+          uni: student.uni,
+          degree: student.degree,
+          resume_link: student.resume_link,
+          linkedin_link: student.linkedin_link,
+          github_link: student.github_link,
+          portfolio_link: student.portfolio_link
         }];
         file += await create_csv_string({header, records, displayHeader: i === 0});
       }, null));

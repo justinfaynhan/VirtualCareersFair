@@ -18,7 +18,7 @@ const makeRegister = (register: IRegister) => {
       }
     } catch (e) {
       // TODO: Error logging
-      console.log(e)
+      console.error(e)
       return {
         headers,
         statusCode: 400,

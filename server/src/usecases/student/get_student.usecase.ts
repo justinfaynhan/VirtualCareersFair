@@ -8,16 +8,17 @@ const makeGetStudent = (studentDb: IStudentDbAccess) => {
     }
     return {
       id,
-      first_name: student.first_name ? student.first_name : '',
-      last_name: student.last_name ? student.last_name : '',
-      about: student.about ? student.about : '',
-      skills: student.skills ? student.skills : [],
-      uni: student.uni ? student.uni : '',
-      degree: student.degree ? student.degree : '',
-      resume_link: student.resume_link ? student.resume_link : '',
-      linkedin_link: student.linkedin_link ? student.linkedin_link : '',
-      github_link: student.github_link ? student.github_link : '',
-      portfolio_link: student.portfolio_link ? student.portfolio_link : ''
+      email: student.email,
+      first_name: student.first_name,
+      last_name: student.last_name,
+      about: student.about,
+      skills: student.skills,
+      uni: student.uni,
+      degree: student.degree,
+      resume_link: student.resume_link,
+      linkedin_link: student.linkedin_link,
+      github_link: student.github_link,
+      portfolio_link: student.portfolio_link
     }
   }
   return getStudent;

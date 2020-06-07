@@ -6,9 +6,9 @@ export interface ICareersFairLanding {
 
 export interface ICareersFairLandingCompany {
   id: string,
-  name: string;
-  logo: any;
-  banner_image: any;
+  name: string | null;
+  logo: any | null;
+  banner_image: any | null;
   taking_interns: boolean | null;
   taking_graduates: boolean | null;
 }

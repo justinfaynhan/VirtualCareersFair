@@ -1,4 +1,4 @@
-import {IBaseEntity, IBaseEntityMakeArgs} from 'interfaces/entities/IBase.entity'
+import {IBaseEntity, IBaseEntityMakeArgs, IBaseData} from 'interfaces/entities/IBase.entity'
 
 export interface IInfoEntity extends IBaseEntity {
   about_us: string | null;
@@ -12,4 +12,11 @@ export interface IInfoEntityMakeArgs extends IBaseEntityMakeArgs {
   student_instructions?: string;
   company_instructions?: string;
   admin_instructions?: string;
+}
+
+export interface IInfoData extends IBaseData {
+  about_us: string | null;
+  student_instructions: string | null;
+  company_instructions: string | null;
+  admin_instructions: string | null;
 }

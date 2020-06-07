@@ -10,14 +10,18 @@ const makeGetCompany = (companyDb: ICompanyDbAccess) => {
     }
     return {
       id,
-      email: company.email ? company.email : '',
-      name: company.name ? company.name : '',
-      slogan: company.slogan ? company.slogan : '',
-      overview: company.overview ? company.overview : '',
-      graduate_stories: company.graduate_stories ? company.graduate_stories : [],
-      videos: company.video ? company.video : '',
-      website: company.website_link ? company.website_link : '',
-      contact_info: company.contact_email ? company.contact_email : ''
+      email: company.email,
+      name: company.name,
+      slogan: company.slogan,
+      overview: company.overview,
+      graduate_stories: company.graduate_stories,
+      video: company.video,
+      website: company.website_link,
+      contact_info: company.contact_email,
+      banner_image: company.banner_image,
+      logo_image: company.logo_image,
+      taking_interns: company.taking_interns,
+      taking_graduates: company.taking_graduates
     }
   }
   return getCompany;

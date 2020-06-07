@@ -20,7 +20,7 @@ const makeGetCompanyAnalyticsDownload = (getCompanyAnalyticsDownload: IGetCompan
       }
     } catch (e) {
       // TODO: Error logging
-      console.log(e)
+      console.error(e)
       return {
         headers,
         statusCode: 400,

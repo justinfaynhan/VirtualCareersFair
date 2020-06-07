@@ -5,8 +5,8 @@ export class Base {
   protected _id_gen: () => string;
 
   protected _id: string;
-  protected _created_at: Date | string | number;
-  protected _updated_at: Date | string | number;
+  protected _created_at: string;
+  protected _updated_at: string;
   constructor(args: IBaseConstructor) {
     this._id_gen = args.id_gen;
 
