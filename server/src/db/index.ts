@@ -27,13 +27,14 @@ export const setupDb = async () => {
     console.log('Mongoose connection successfully created model schemas');
 
     // seedDb(db, {Student, Admin, Company, Info, Invite}); // warning this will reset the db and populate with dummy data.
-
-    const default_admin_account = await makeAdmin.Make({email: config.ADMIN.default.EMAIL, password: config.ADMIN.default.PASSWORD});
-    try {
-      Admin.create(default_admin_account);
-      console.log('Creating default admin account with email: ' + config.ADMIN.default.EMAIL + '...');
-    } catch(e) {
-      console.log('Error creating default admin role: ' + e);
+    if ((await Admin.findOne({email: config.ADMIN.default.EMAIL})) === null) {
+      const default_admin_account = await makeAdmin.Make({email: config.ADMIN.default.EMAIL, password: config.ADMIN.default.PASSWORD});
+      try {
+        Admin.create(default_admin_account);
+        console.log('Creating default admin account with email: ' + config.ADMIN.default.EMAIL + '...');
+      } catch(e) {
+        console.log('Error creating default admin role: ' + e);
+      }
     }
     
     if ((await Info.findOne()) === null) {

@@ -12,7 +12,7 @@ const makeUpdateDashboardInfo = (updateDashboard: IUpdateDashboard) => {
       if (!authorizations.includes('ADMIN')) throw new Error('Unauthorized, must be ADMIN.');
 
       const type: string = httpRequest.params.type;
-      const dashboard: IDashboard = JSON.parse(httpRequest.body);
+      const dashboard: any = httpRequest.body;
       const new_dashboard = await updateDashboard(type, dashboard);
       return {
         headers,

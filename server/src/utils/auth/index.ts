@@ -8,8 +8,8 @@ interface ITokenPayload {
 }
 
 export const token_gen = ({email, authorization}: ITokenPayload) => {
-  // Sign token with 48hour expiry
-  return jwt.sign({email, authorization}, config.AUTH.JWT.SECRET, {expiresIn: 60 * 60 * 24 * 2});
+  // Sign token with 4hour expiry
+  return jwt.sign({email, authorization}, config.AUTH.JWT.SECRET, {expiresIn: 60 * 60 * 4});
 }
 
 export const token_decode = (token: string) => {

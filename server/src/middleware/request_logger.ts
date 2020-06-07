@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-export const requestLogger = (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+export const request_logger = (req: express.Request, resp: express.Response, next: express.NextFunction) => {
   console.info(`${req.method} ${req.originalUrl}`);
 	const start = new Date().getTime();
 	resp.on('finish', () => {
@@ -10,4 +10,4 @@ export const requestLogger = (req: express.Request, resp: express.Response, next
 	next();
 };
 
-export default requestLogger;
+export default request_logger;
