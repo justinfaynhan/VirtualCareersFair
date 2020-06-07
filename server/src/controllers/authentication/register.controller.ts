@@ -11,9 +11,10 @@ const makeRegister = (register: IRegister) => {
       const password: string = httpRequest.query.password;
       const invite_code: string = httpRequest.query.invite_code;
       const token = await register(email, password, invite_code);
+      let statusCode = 200;
       return {
         headers,
-        statusCode: 200,
+        statusCode,
         body: token
       }
     } catch (e) {
