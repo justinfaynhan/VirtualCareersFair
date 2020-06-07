@@ -5,7 +5,6 @@ const routePaths = {
 }
 
 export default class Routes {
-    
     public getLoginRoute() {
         return this.makeRoutes(routePaths.login);
     }

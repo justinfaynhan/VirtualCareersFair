@@ -3,11 +3,17 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "semantic-ui-css/semantic.min.css";
+import GlobalState from "context/GlobalState";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <GlobalState>
+    <Router>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Router>
+  </GlobalState>,
   document.getElementById("root")
 );
 

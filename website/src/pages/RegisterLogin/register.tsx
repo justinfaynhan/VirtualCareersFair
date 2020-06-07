@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
-import { Form, Input, Button } from "semantic-ui-react";
-import Routes from "../../Routes/AppRoutes";
-import CredentialService from "../../Services/CredentialService";
+import CredentialService from "../../services/CredentialService";
 import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import { Form, Input, Button } from "semantic-ui-react";
 import {
   UserSignUpCredentials,
   UserAuthDetail,
-} from "../../Models/BindingModels";
-import LoadingContext from "Context/loadingContext";
+} from "../../models/BindingModels";
+import LoadingContext from "../../context/loadingContext";
+import { routeNames } from "../../routes/AppRoutes";
 
 function RegisterCard(props) {
   const [input, setInput] = useState({
@@ -62,7 +62,7 @@ function RegisterCard(props) {
   if (redirect) {
     return (
       <Router>
-        <Redirect to={Routes.home} />
+        <Redirect to={routeNames.home} />
       </Router>
     );
   }

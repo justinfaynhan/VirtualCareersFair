@@ -4,10 +4,10 @@ import { Redirect, BrowserRouter as Router } from "react-router-dom";
 import {
   UserLoginCredentials,
   UserAuthDetail,
-} from "../../Models/BindingModels";
-import Routes from "../../Routes/AppRoutes";
-import CredentialService from "../../Services/CredentialService";
-import LoadingContext from "Context/loadingContext";
+} from "../../models/BindingModels";
+import { routeNames } from "../../routes/AppRoutes";
+import CredentialService from "../../services/CredentialService";
+import LoadingContext from "context/loadingContext";
 
 function LoginCard(props) {
   const [input, setInput] = useState({
@@ -56,7 +56,7 @@ function LoginCard(props) {
   if (redirect) {
     return (
       <Router>
-        <Redirect to={Routes.home} />
+        <Redirect to={routeNames.home} />
       </Router>
     );
   }
