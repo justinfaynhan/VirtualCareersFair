@@ -1,0 +1,13 @@
+@import 'variables';
+
+#navBar {
+  background-color: #fff !important;
+
+  .menuLink {
+    &:hover {
+      border-bottom: 3px solid $hover;
+      padding-bottom: 6px;
+      border-radius: 0px;
+    }
+  }
+}
