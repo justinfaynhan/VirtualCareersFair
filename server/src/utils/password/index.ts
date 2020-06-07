@@ -18,4 +18,8 @@ export const check = async (plaintext: string, hash: string) => {
   }
 }
 
+export const password_validate = (password: string) => {
+  return password.length >= 12;
+}
+
 export default hash;

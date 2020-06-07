@@ -19,7 +19,7 @@ export class Student extends User {
   private _portfolio_link?: string | null;
 
   constructor(args: IStudentConstructor) {
-    super({id_gen: args.id_gen, hash: args.hash, email_validate: args.email_validate});
+    super({id_gen: args.id_gen, hash: args.hash, email_validate: args.email_validate, password_validate: args.password_validate});
     this._sanitizer = args.sanitizer;
 
     this._first_name = null;
@@ -77,25 +77,8 @@ export class Student extends User {
     github_link, 
     portfolio_link
   }: IStudentEntityMakeArgs) {
-    if (email) {
-      if (this._email_validate(email)) {
-        this._email = email;
-      } else {
-        throw new Error(`Error, '${email}' is an invalid email address.`)
-      }
-    } else {
-      this._email = null;
-    }
-
-    if (password) {
-      try {
-        this._password = await this._hash(password);
-      } catch {
-        throw new Error(`Error, failed to hash ${password}.`)
-      }
-    } else {
-      this._password = null;
-    }
+    await this.setEmail(email);
+    await this.setPassword(password);
 
     this._first_name = first_name ? this._sanitizer(first_name) : null;
     this._last_name = last_name ? this._sanitizer(last_name) : null;

@@ -24,7 +24,7 @@ export class Company extends User {
   private _page_analytics: IAnalytics | null;
 
   constructor(args: ICompanyConstructor) {
-    super({hash: args.hash, email_validate: args.email_validate, id_gen: args.id_gen});
+    super({hash: args.hash, email_validate: args.email_validate, id_gen: args.id_gen, password_validate: args.password_validate});
     this._sanitizer = args.sanitizer;
     this._id_check = args.id_check;
 
@@ -93,26 +93,8 @@ export class Company extends User {
     taking_graduates,
     page_analytics
   }: ICompanyEntityMakeArgs) {
-    logo_image;
-    if (email) {
-      if (this._email_validate(email)) {
-        this._email = email;
-      } else {
-        throw new Error(`Error, '${email}' is an invalid email address.`)
-      }
-    } else {
-      this._email = null;
-    }
-
-    if (password) {
-      try {
-        this._password = await this._hash(password);
-      } catch {
-        throw new Error(`Error, failed to hash ${password}.`)
-      }
-    } else {
-      this._password = null;
-    }
+    await this.setEmail(email);
+    await this.setPassword(password);
 
     this._name = name ? this._sanitizer(name) : null;
     this._slogan = slogan ? this._sanitizer(slogan) : null;

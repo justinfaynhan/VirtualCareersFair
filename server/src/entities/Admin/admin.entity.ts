@@ -12,25 +12,8 @@ export class Admin extends User {
     email,
     password
   }: IAdminEntityMakeArgs) {
-    if (email) {
-      if (this._email_validate(email)) {
-        this._email = email;
-      } else {
-        throw new Error(`Error, '${email}' is an invalid email address.`)
-      }
-    } else {
-      this._email = null;
-    }
-
-    if (password) {
-      try {
-        this._password = await this._hash(password);
-      } catch {
-        throw new Error(`Error, failed to hash ${password}.`)
-      }
-    } else {
-      this._password = null;
-    }
+    await this.setEmail(email);
+    await this.setPassword(password);
 
     return {
       _id: this._id,

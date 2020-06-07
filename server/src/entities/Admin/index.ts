@@ -1,8 +1,8 @@
 import Admin from 'entities/Admin/admin.entity';
 import {id_gen} from 'utils/id';
-import {hash} from 'utils/hash';
-import {validate} from 'utils/email';
+import {hash, password_validate} from 'utils/password';
+import {email_validate} from 'utils/email';
 
-export const makeAdmin = new Admin({id_gen, hash, email_validate: validate});
+export const makeAdmin = new Admin({id_gen, hash, email_validate, password_validate});
 
 export default makeAdmin;

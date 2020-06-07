@@ -1,7 +1,7 @@
 import * as EmailValidator from 'email-validator';
 
-export const validate = (email: string) => {
+export const email_validate = (email: string) => {
   return EmailValidator.validate(email);
 };
 
-export default validate;
+export default email_validate;

@@ -5,7 +5,7 @@ import {makeInvite, makeAdmin, makeCompany, makeStudent} from 'entities'
 import {IInviteEntity, IAdminEntity, IStudentEntity, ICompanyEntity} from 'interfaces/entities'
 import {IAuthorizationTypes} from 'interfaces/IAuthorization'
 import {token_gen} from 'utils/auth';
-import {hash, check} from 'utils/hash';
+import {hash, check} from 'utils/password';
 
 interface IDbs {
   adminDb: IAdminDbAccess;

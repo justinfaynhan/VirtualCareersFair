@@ -5,7 +5,7 @@ import {makeInvite, makeAdmin, makeCompany, makeStudent} from 'entities'
 import {IInviteEntity, IAdminEntity, IStudentEntity, ICompanyEntity} from 'interfaces/entities'
 
 import {token_gen} from 'utils/auth';
-import {hash} from 'utils/hash';
+import {hash} from 'utils/password';
 
 interface IDbs {
   adminDb: IAdminDbAccess;
@@ -20,12 +20,9 @@ const makeRegisterUser = ({adminDb, companyDb, studentDb}: IDbs, inviteCodeDb: I
       throw new Error("Error, invalid invite code provided.");
     } else if (!res._id) {
       throw new Error("Error retrieving user id.");
-    } else {
-      try {
-        inviteCodeDb.removeOne({_id: res._id});
-      } catch(e) {
-        throw new Error('Error removing existing invite code: ' + e);
-      }
+    } 
+    if (await adminDb.findByEmail({email}) || await companyDb.findByEmail({email}) || await studentDb.findByEmail({email})) {
+      throw new Error(`User with email ${email} already exists.`);
     }
     try {
       if (res.privilege === 'ADMIN') {
@@ -40,6 +37,7 @@ const makeRegisterUser = ({adminDb, companyDb, studentDb}: IDbs, inviteCodeDb: I
       } else {
         throw new Error(`Error, invalid privilege ${res.privilege} type for user ${email}.`);
       }
+      inviteCodeDb.removeOne({_id: res._id});
     } catch(e) {
       throw new Error('Error adding new user: ' + e);
     }
