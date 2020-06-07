@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Card } from "semantic-ui-react";
-import Login from "./login";
-import Register from "./register";
-import Loader from "../../components/Helpers/LoaderComponent";
+import React, { useState } from 'react'
+import { Card } from 'semantic-ui-react'
+import Login from './login'
+import Register from './register'
+import Loader from '../../components/Helpers/LoaderComponent'
 
 function LoginRegisterPage() {
   const [pageState, setPageState] = useState({
@@ -10,13 +10,13 @@ function LoginRegisterPage() {
     loginleft: 20,
     registerleft: 550,
     toggleButtonLeft: 0,
-  });
+  })
 
   const clickLogin = () => {
     // if it's login already then return
-    console.log(pageState);
+    console.log(pageState)
     if (pageState.isLogin) {
-      return;
+      return
     }
 
     setPageState({
@@ -24,13 +24,13 @@ function LoginRegisterPage() {
       loginleft: 20,
       registerleft: 550,
       toggleButtonLeft: 0,
-    });
-  };
+    })
+  }
 
   const clickRegister = () => {
     // if it's register already then return
     if (!pageState.isLogin) {
-      return;
+      return
     }
 
     setPageState({
@@ -38,8 +38,8 @@ function LoginRegisterPage() {
       loginleft: -550,
       registerleft: 20,
       toggleButtonLeft: 110,
-    });
-  };
+    })
+  }
 
   return (
     <div id="LoginRegisterPage" className="flex-container-centered">
@@ -47,35 +47,23 @@ function LoginRegisterPage() {
       <Card className="formContainer">
         <Card.Content className="contentContainer">
           <div className="buttonContainer">
-            <div
-              id="selected-toggle-btn"
-              style={{ left: pageState.toggleButtonLeft }}
-            ></div>
+            <div id="selected-toggle-btn" style={{ left: pageState.toggleButtonLeft }}></div>
             <button
-              className={
-                pageState.isLogin
-                  ? "toggle-btn active-btn"
-                  : "toggle-btn inactive-btn"
-              }
+              className={pageState.isLogin ? 'toggle-btn active-btn' : 'toggle-btn inactive-btn'}
               onClick={clickLogin}
             >
               Login
             </button>
             <button
               className={
-                !pageState.isLogin
-                  ? "toggle-btn active-btn right"
-                  : "toggle-btn inactive-btn right"
+                !pageState.isLogin ? 'toggle-btn active-btn right' : 'toggle-btn inactive-btn right'
               }
               onClick={clickRegister}
             >
               Register
             </button>
           </div>
-          <div
-            className="transition-input-group input-form"
-            style={{ left: pageState.loginleft }}
-          >
+          <div className="transition-input-group input-form" style={{ left: pageState.loginleft }}>
             <Login />
           </div>
           <div
@@ -87,7 +75,7 @@ function LoginRegisterPage() {
         </Card.Content>
       </Card>
     </div>
-  );
+  )
 }
 
-export default LoginRegisterPage;
+export default LoginRegisterPage

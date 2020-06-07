@@ -1,64 +1,58 @@
-import React, { useState, useContext } from "react";
-import { Form, Input, Button } from "semantic-ui-react";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
-import {
-  UserLoginCredentials,
-  UserAuthDetail,
-} from "../../Models/BindingModels";
-import Routes from "../../Routes/AppRoutes";
-import CredentialService from "../../Services/CredentialService";
-import LoadingContext from "Context/loadingContext";
+import React, { useState, useContext } from 'react'
+import { Form, Input, Button } from 'semantic-ui-react'
+import { Redirect, BrowserRouter as Router } from 'react-router-dom'
+import { UserLoginCredentials, UserAuthDetail } from '../../models/BindingModels'
+import { routeNames } from '../../routes/AppRoutes'
+import CredentialService from '../../services/CredentialService'
+import LoadingContext from 'context/loadingContext'
 
 function LoginCard(props) {
   const [input, setInput] = useState({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+  })
 
   // redirect
-  const [redirect, setRedirect] = useState(false);
-  const blockUi = useContext(LoadingContext);
+  const [redirect, setRedirect] = useState(false)
+  const blockUi = useContext(LoadingContext)
 
   const handleEmailUpdate = (event) => {
-    const email = event.target.value;
-    setInput((prevState) => ({ ...prevState, email }));
-  };
+    const email = event.target.value
+    setInput((prevState) => ({ ...prevState, email }))
+  }
 
   const handlePasswordUpdate = (event) => {
-    const password = event.target.value;
-    setInput((prevState) => ({ ...prevState, password }));
-  };
+    const password = event.target.value
+    setInput((prevState) => ({ ...prevState, password }))
+  }
 
   const handleLogin = async () => {
-    const loginModel: UserLoginCredentials = new UserLoginCredentials(
-      input.email,
-      input.password
-    );
+    const loginModel: UserLoginCredentials = new UserLoginCredentials(input.email, input.password)
 
-    const credService = new CredentialService();
+    const credService = new CredentialService()
 
     // turn on blockUI
-    blockUi.toggleLoadingOn("Logging in, please wait");
+    blockUi.toggleLoadingOn('Logging in, please wait')
 
-    console.log("blocked ui", blockUi.isLoading, blockUi.loadingMessage);
+    console.log('blocked ui', blockUi.isLoading, blockUi.loadingMessage)
 
-    const userAuth: UserAuthDetail = await credService.Login(loginModel);
-    console.log(userAuth);
+    const userAuth: UserAuthDetail = await credService.Login(loginModel)
+    console.log(userAuth)
 
-    blockUi.toggleLoadingOff();
+    blockUi.toggleLoadingOff()
 
     // if the userAuth isn't null then don't route back
     if (userAuth != null) {
-      setRedirect(true);
+      setRedirect(true)
     }
-  };
+  }
 
   if (redirect) {
     return (
       <Router>
-        <Redirect to={Routes.home} />
+        <Redirect to={routeNames.home} />
       </Router>
-    );
+    )
   }
 
   return (
@@ -93,7 +87,7 @@ function LoginCard(props) {
         </Form.Field>
       </Form>
     </div>
-  );
+  )
 }
 
-export default LoginCard;
+export default LoginCard

@@ -1,70 +1,67 @@
-import React, { useState, useContext } from "react";
-import { Form, Input, Button } from "semantic-ui-react";
-import Routes from "../../Routes/AppRoutes";
-import CredentialService from "../../Services/CredentialService";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
-import {
-  UserSignUpCredentials,
-  UserAuthDetail,
-} from "../../Models/BindingModels";
-import LoadingContext from "Context/loadingContext";
+import React, { useState, useContext } from 'react'
+import CredentialService from '../../services/CredentialService'
+import { Redirect, BrowserRouter as Router } from 'react-router-dom'
+import { Form, Input, Button } from 'semantic-ui-react'
+import { UserSignUpCredentials, UserAuthDetail } from '../../models/BindingModels'
+import LoadingContext from '../../context/loadingContext'
+import { routeNames } from '../../routes/AppRoutes'
 
 function RegisterCard(props) {
   const [input, setInput] = useState({
-    inviteCode: "",
-    email: "",
-    password: "",
-  });
+    inviteCode: '',
+    email: '',
+    password: '',
+  })
 
   // redirect
-  const [redirect, setRedirect] = useState(false);
-  const blockUi = useContext(LoadingContext);
+  const [redirect, setRedirect] = useState(false)
+  const blockUi = useContext(LoadingContext)
 
   const handleEmailUpdate = (event) => {
-    const email = event.target.value;
-    setInput((prevState) => ({ ...prevState, email }));
-  };
+    const email = event.target.value
+    setInput((prevState) => ({ ...prevState, email }))
+  }
 
   const handlePasswordUpdate = (event) => {
-    const password = event.target.value;
-    setInput((prevState) => ({ ...prevState, password }));
-  };
+    const password = event.target.value
+    setInput((prevState) => ({ ...prevState, password }))
+  }
 
   const handleInviteCodeUpdate = (event) => {
-    const inviteCode = event.target.value;
-    setInput((prevState) => ({ ...prevState, inviteCode }));
-  };
+    const inviteCode = event.target.value
+    setInput((prevState) => ({ ...prevState, inviteCode }))
+  }
 
   const handleRegister = async () => {
     const loginModel: UserSignUpCredentials = new UserSignUpCredentials(
       input.email,
       input.password,
       input.inviteCode
-    );
+    )
 
-    const credService = new CredentialService();
+    const credService = new CredentialService()
 
     // turn on blockUI
-    blockUi.toggleLoadingOn("Registering, please wait");
+    blockUi.toggleLoadingOn('Registering, please wait')
 
-    const userAuth: UserAuthDetail = await credService.Register(loginModel);
-    console.log(userAuth);
+    const userAuth: UserAuthDetail = await credService.Register(loginModel)
+    console.log(userAuth)
 
     //turn off blockUI
-    blockUi.toggleLoadingOff();
+    blockUi.toggleLoadingOff()
 
     // if the userAuth isn't null then don't route back
     if (userAuth != null) {
-      setRedirect(true);
+      setRedirect(true)
     }
-  };
+  }
 
   if (redirect) {
     return (
       <Router>
-        <Redirect to={Routes.home} />
+        <Redirect to={routeNames.home} />
       </Router>
-    );
+    )
   }
 
   return (
@@ -109,7 +106,7 @@ function RegisterCard(props) {
         </Form.Field>
       </Form>
     </div>
-  );
+  )
 }
 
-export default RegisterCard;
+export default RegisterCard
